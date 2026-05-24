@@ -32,7 +32,6 @@ body::after {
 
 .page { position:relative; z-index:1; max-width:960px; margin:0 auto; padding:32px 16px 80px; }
 
-/* TOPBAR */
 .topbar { display:flex; align-items:center; gap:12px; margin-bottom:36px; animation:fadeSlideDown .7s cubic-bezier(.16,1,.3,1) both; }
 .logo-mark { width:40px; height:40px; border-radius:10px; flex-shrink:0; background:linear-gradient(135deg,var(--blue),var(--violet)); display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:#fff; box-shadow:0 0 24px var(--blue-glow); }
 .topbar-info { flex:1; min-width:0; }
@@ -45,13 +44,11 @@ body::after {
 .conn-label-text { display:none; }
 @media(min-width:420px) { .conn-label-text { display:inline; } }
 
-/* HERO */
 .hero { margin-bottom:28px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .1s both; }
 .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(30px,7vw,52px); font-weight:800; line-height:1.08; letter-spacing:-1px; background:linear-gradient(135deg,#E8ECF4 0%,#6B7A99 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .hero h1 span { background:linear-gradient(135deg,var(--blue),var(--violet)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .hero-desc { margin-top:10px; font-size:14px; color:var(--txt2); line-height:1.6; max-width:420px; }
 
-/* MAPEL SELECTOR */
 .mapel-tabs { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .15s both; }
 .mapel-tab { padding:14px 16px; border-radius:14px; border:1px solid var(--edge); background:var(--ink2); cursor:pointer; transition:all .25s; position:relative; overflow:hidden; -webkit-tap-highlight-color:transparent; }
 .mapel-tab::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity .25s; }
@@ -68,7 +65,6 @@ body::after {
 .mapel-tab.active.inst  .mapel-badge { display:block; background:var(--blue-dim); color:var(--blue); }
 .mapel-tab.active.manaj .mapel-badge { display:block; background:var(--amber-dim); color:var(--amber); }
 
-/* SEM TABS */
 .sem-tabs { display:flex; gap:8px; margin-bottom:20px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .2s both; }
 .sem-tab { flex:1; padding:12px 14px; border-radius:12px; border:1px solid var(--edge); background:var(--ink2); cursor:pointer; text-align:center; transition:all .25s; position:relative; overflow:hidden; -webkit-tap-highlight-color:transparent; }
 .sem-tab::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity .25s; }
@@ -85,7 +81,6 @@ body::after {
 .sem-tab.active.ganjil .sem-badge { display:block; }
 .sem-tab.active.genap  .sem-badge { display:block; background:var(--violet-dim); color:var(--violet); }
 
-/* SEARCH */
 .search-wrap { position:relative; margin-bottom:14px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .24s both; }
 .search-ico { position:absolute; left:16px; top:50%; transform:translateY(-50%); pointer-events:none; opacity:.4; }
 .search-input { width:100%; background:var(--ink2); border:1.5px solid var(--edge2); border-radius:14px; padding:16px 16px 16px 48px; font-family:'DM Sans',sans-serif; font-size:16px; font-weight:500; color:var(--txt); outline:none; transition:border-color .25s,box-shadow .25s; -webkit-appearance:none; }
@@ -103,14 +98,12 @@ body::after {
 .dd-empty { padding:20px; text-align:center; color:var(--txt3); font-size:13px; }
 mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; padding:0 2px; }
 
-/* STATUS */
 .status-line { display:flex; align-items:center; gap:8px; margin-bottom:28px; font-size:12px; color:var(--txt3); font-family:'DM Mono',monospace; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .28s both; }
 .s-dot { width:6px; height:6px; border-radius:50%; background:var(--txt3); flex-shrink:0; }
 .s-dot.ok  { background:var(--green); box-shadow:0 0 8px var(--green); animation:pulse 2s infinite; }
 .s-dot.err { background:var(--red); }
 #sText { font-size:11px; line-height:1.5; }
 
-/* RESULT */
 .result { display:none; }
 .result.show { display:block; animation:fadeSlideUp .5s cubic-bezier(.16,1,.3,1) both; }
 .prof-strip { background:var(--ink2); border:1px solid var(--edge); border-radius:16px 16px 0 0; padding:20px; display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap; border-bottom:none; position:relative; overflow:hidden; }
@@ -157,7 +150,6 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
 .t .mat-chip { background:rgba(52,211,153,.15); color:var(--green); }
 .b .mat-chip { background:rgba(248,113,113,.15); color:var(--red); }
 
-/* DEBUG BOX */
 .debug-box { margin-top:16px; padding:14px 16px; border-radius:12px; font-size:11px; line-height:1.8; word-break:break-all; }
 .debug-box.warn { background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.3); color:#FBBF24; }
 .debug-box.err  { background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.3); color:#F87171; font-family:monospace; }
@@ -190,9 +182,7 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
   .stat-lbl { font-size:8px; }
   .hero h1 { letter-spacing:-.5px; }
 }
-@media(max-width:340px) {
-  .materi-grid { grid-template-columns:1fr; }
-}
+@media(max-width:340px) { .materi-grid { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -274,164 +264,178 @@ const SHEETS = {
 };
 
 // ── State ──────────────────────────────────────────────────────────────────────
-const data = { inst:{ganjil:[],genap:[]}, manaj:{ganjil:[],genap:[]} };
+const data  = { inst:{ganjil:[],genap:[]}, manaj:{ganjil:[],genap:[]} };
 const state = { mapel:'inst', sem:'ganjil', filtered:[] };
 
 // ── Utils ──────────────────────────────────────────────────────────────────────
 const $    = id => document.getElementById(id);
 const hl   = (t,q) => t.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi'),'<mark>$1</mark>');
 const ini  = n => n.split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
-const avaBg= n => { const c=['#4F8EF7','#8B5CF6','#34D399','#F59E0B','#EC4899','#06B6D4']; return c[n.charCodeAt(0)%c.length]; };
-
-function setConn(type, label) {
-  $('connDot').className = 'conn-dot'+(type==='ok'?' live':type==='err'?' err':'');
-  $('connLabel').textContent = label;
+const avaBg= n => {
+  const c=['#4F8EF7','#8B5CF6','#34D399','#F59E0B','#EC4899','#06B6D4'];
+  return c[n.charCodeAt(0)%c.length];
+};
+function setConn(type,label){
+  $('connDot').className='conn-dot'+(type==='ok'?' live':type==='err'?' err':'');
+  $('connLabel').textContent=label;
 }
-function setStatus(type, msg) {
-  $('sDot').className = 's-dot'+(type==='ok'?' ok':type==='err'?' err':'');
-  $('sText').textContent = msg;
+function setStatus(type,msg){
+  $('sDot').className='s-dot'+(type==='ok'?' ok':type==='err'?' err':'');
+  $('sText').textContent=msg;
 }
 
-// ── Normalize label kolom dari GViz ───────────────────────────────────────────
-// GViz kadang menggabungkan teks merged-cell title + header kolom.
-// Fungsi ini mengekstrak bagian yang relevan.
-function normalizeColLabel(raw) {
+// ── Normalisasi label kolom GViz ───────────────────────────────────────────────
+// GViz menggabungkan teks dari merged-cell judul laporan dengan header kolom.
+// Contoh nyata dari sheet ini:
+//   "LAPORAN KETUNTASAN SISWA — INSTALASI JARINGAN | SEMESTER GANJIL Nama Siswa"
+//   "Materi & Praktikum 1 Pengertian dan Fungsi Jaringan Komputer"
+//   "Materi 1 Status"
+//
+// Strategi: cari posisi kata kunci yang dikenal, potong dari situ.
+function normalizeLabel(raw) {
   if (!raw) return '';
-  let label = raw.trim();
-  // Kalau ada "Materi" di label, potong dari situ ke belakang
-  const mIdx = label.search(/Materi\s+\d+/i);
-  if (mIdx > 0) label = label.substring(mIdx);
-  return label;
+  const s = raw.trim();
+
+  // Daftar pola yang menjadi "awal bermakna" dari label kolom
+  // Urutan PENTING — lebih spesifik dulu
+  const anchors = [
+    /Materi\s*&\s*Praktikum\s+\d+/i,   // "Materi & Praktikum N ..."
+    /Materi\s+\d+\s+Status/i,           // "Materi N Status"
+    /Materi\s+\d+/i,                    // "Materi N ..."
+    /Status\s+Kelengkapan/i,
+    /Kelengkapan/i,
+    /No\.?\s*Induk/i,
+    /NISN?/i,
+    /Nama\s+Siswa/i,
+    /Kelas/i,
+  ];
+
+  for (const pattern of anchors) {
+    const m = s.search(pattern);
+    if (m > 0) return s.substring(m).trim();   // potong prefix junk
+    if (m === 0) return s;                      // sudah bersih
+  }
+  return s; // kembalikan apa adanya
 }
 
-// ── Parse GViz response ────────────────────────────────────────────────────────
-// Mendukung berbagai kemungkinan struktur header di Google Sheets:
+// ── parseGViz — robust untuk struktur sheet aktual ────────────────────────────
 //
-// POLA A — 3 kolom per materi (paling umum):
-//   "Materi 1" | "Nilai" | "Status"        → nama ambil dari kolom "Materi N" di baris data
-//   Atau: "Materi 1 Nama Materi" | "Nilai" | "Status"
+// Struktur kolom yang SUDAH DIKONFIRMASI dari debug:
+//   [0]  "...Nama Siswa"          → nama siswa
+//   [1]  "Kelas"                  → kelas
+//   [2]  "No. Induk"              → NIS
+//   [3]  "Materi & Praktikum 1 <Nama Panjang Materi>"  → NILAI materi 1
+//   [4]  "Materi 1 Status"        → STATUS materi 1
+//   [5]  "Materi & Praktikum 2 <Nama Panjang Materi>"  → NILAI materi 2
+//   [6]  "Materi 2 Status"        → STATUS materi 2
+//   ... dst.
+//   [N]  "Kelengkapan / Status Kelengkapan"
 //
-// POLA B — 2 kolom per materi:
-//   "Materi 1 Nilai" | "Materi 1 Status"   → nama = "Materi 1"
-//
-// POLA C — header berisi nama panjang:
-//   "Materi 1 Instalasi Kabel UTP" | "Materi 1 Status"
+// Pola: kolom nilai  → label mengandung "Materi & Praktikum N" (atau "Materi N" saja)
+//                      dan BUKAN "Status"
+//       kolom status → label mengandung "Materi N Status"
 //
 function parseGViz(json) {
-  const rawCols = json.table.cols || [];
-  const rows    = json.table.rows || [];
+  const rawCols = json.table?.cols || [];
+  const rows    = json.table?.rows || [];
 
-  // Step 1: Normalisasi semua label
-  const cols = rawCols.map((c, i) => ({
-    idx:   i,
-    raw:   c.label || '',
-    label: normalizeColLabel(c.label || '')
+  // Normalisasi semua label
+  const cols = rawCols.map((c,i) => ({
+    i,
+    raw: c.label || '',
+    lbl: normalizeLabel(c.label || '')
   }));
 
-  // Step 2: Identifikasi kolom tetap
-  let colNama = -1, colKelas = -1, colNIS = -1, colKelengkapan = -1;
+  // ── Identifikasi kolom tetap ─────────────────────────────────────────────
+  let iNama = -1, iKelas = -1, iNIS = -1, iKelengkapan = -1;
+
   cols.forEach(c => {
-    const l = c.label.toLowerCase();
-    if (colNama    < 0 && /^nama(\s+siswa)?$/.test(l))              colNama    = c.idx;
-    if (colKelas   < 0 && /^kelas$/.test(l))                        colKelas   = c.idx;
-    if (colNIS     < 0 && /no\.?\s*induk|^nis$|^nisn$/.test(l))    colNIS     = c.idx;
-    if (colKelengkapan < 0 && /kelengkapan|status\s*kel/.test(l))   colKelengkapan = c.idx;
+    const l = c.lbl.toLowerCase();
+    // Nama Siswa — bisa ada setelah prefix panjang, sudah dinormalisasi
+    if (iNama < 0 && /^nama\s+siswa$/.test(l)) { iNama = c.i; return; }
+    if (iKelas < 0 && /^kelas$/.test(l))        { iKelas = c.i; return; }
+    if (iNIS   < 0 && /^no\.?\s*induk$|^nisn?$/.test(l)) { iNIS = c.i; return; }
+    if (iKelengkapan < 0 && /kelengkapan|status\s+kel/i.test(l)) { iKelengkapan = c.i; return; }
   });
 
-  // Step 3: Deteksi kolom materi
-  // Kumpulkan semua indeks "Materi N" (angka N)
-  // Setiap grup Materi N bisa punya kolom: nama/nilai, status
-  const materiGroups = {}; // N -> { nilaiIdx:[], statusIdx:-1 }
+  // ── Identifikasi kolom materi ────────────────────────────────────────────
+  // Regex utama untuk kolom STATUS: "Materi N Status" (tanpa "& Praktikum")
+  const reStatus = /^Materi\s+(\d+)\s+Status\b/i;
+
+  // Regex untuk kolom NILAI / nama materi panjang:
+  //   "Materi & Praktikum N <nama>"   → group(1)=N, group(2)=nama
+  //   "Materi N <nama>"               → group(1)=N, group(2)=nama (mungkin kosong)
+  // PENTING: harus BUKAN "Materi N Status"
+  const reNilai = /^Materi(?:\s*&\s*Praktikum)?\s+(\d+)\s*(.*)?$/i;
+
+  // materiMap: { N: { nilaiIdx, statusIdx, namaMateri } }
+  const materiMap = {};
 
   cols.forEach(c => {
-    const l = c.label;
+    const lbl = c.lbl;
 
-    // Match kolom Status: "Materi N Status" (boleh ada suffix)
-    const mSt = l.match(/^Materi\s+(\d+)\s+Status\b/i);
+    // Coba status dulu (lebih spesifik)
+    const mSt = lbl.match(reStatus);
     if (mSt) {
       const n = parseInt(mSt[1]);
-      if (!materiGroups[n]) materiGroups[n] = { nilaiIdx:[], statusIdx:-1, namaFromHeader:'' };
-      materiGroups[n].statusIdx = c.idx;
+      if (!materiMap[n]) materiMap[n] = { nilaiIdx:-1, statusIdx:-1, namaMateri:'' };
+      materiMap[n].statusIdx = c.i;
       return;
     }
 
-    // Match kolom nilai/nama: "Materi N ..." (tapi bukan "Status")
-    const mMat = l.match(/^Materi\s+(\d+)\b(.*)?$/i);
-    if (mMat) {
-      const n     = parseInt(mMat[1]);
-      const suffix = (mMat[2] || '').trim().replace(/^[-:—\s]+/,'').replace(/\s*nilai\s*$/i,'').trim();
-      if (!materiGroups[n]) materiGroups[n] = { nilaiIdx:[], statusIdx:-1, namaFromHeader:'' };
-      materiGroups[n].nilaiIdx.push(c.idx);
-      // Kalau suffix adalah nama bermakna (bukan "Nilai" / "nilai" / kosong), simpan sebagai nama
-      if (suffix && !/^nilai$/i.test(suffix)) {
-        materiGroups[n].namaFromHeader = suffix;
-      }
-      return;
-    }
+    // Coba kolom nilai/nama materi
+    const mNilai = lbl.match(reNilai);
+    if (mNilai) {
+      const n    = parseInt(mNilai[1]);
+      // Nama materi = sisa setelah "Materi [& Praktikum] N "
+      // Bersihkan: buang kata "Nilai" di akhir kalau ada
+      let nama = (mNilai[2] || '').trim().replace(/\s*nilai\s*$/i,'').trim();
+      if (!nama) nama = `Materi ${n}`;
 
-    // Kolom "Nilai" generik (tanpa prefix Materi N) yang mungkin milik materi sebelumnya
-    // — tidak ditangani di sini, ditangani lewat fallback baris data
+      if (!materiMap[n]) materiMap[n] = { nilaiIdx:-1, statusIdx:-1, namaMateri:'' };
+      materiMap[n].nilaiIdx   = c.i;
+      materiMap[n].namaMateri = nama;
+    }
   });
 
-  const sortedNums = Object.keys(materiGroups).map(Number).sort((a,b)=>a-b);
+  const nums = Object.keys(materiMap).map(Number).sort((a,b)=>a-b);
 
-  // Step 4: Parse baris
+  // ── Parse baris data ─────────────────────────────────────────────────────
+  const getCell = (cells, idx) => {
+    if (idx < 0 || idx >= cells.length) return '';
+    const v = cells[idx]?.v;
+    if (v === null || v === undefined) return '';
+    return String(v).trim();
+  };
+
   const results = [];
 
   rows.forEach(row => {
     const cells = row.c || [];
-    const getCell = idx => {
-      if (idx < 0 || idx >= cells.length) return '';
-      const v = cells[idx]?.v;
-      return v !== null && v !== undefined ? String(v).trim() : '';
-    };
+    const nama  = getCell(cells, iNama);
+
+    // Buang baris kosong / header / judul
+    const nl = nama.toLowerCase();
+    if (!nama || /^nama(\s+siswa)?$/.test(nl) || /^no\.?$/.test(nl)) return;
 
     const obj = {
-      nama: getCell(colNama),
-      kelas: getCell(colKelas),
-      nis: getCell(colNIS),
-      kelengkapan: getCell(colKelengkapan),
-      materi: []
+      nama,
+      kelas:       getCell(cells, iKelas),
+      nis:         getCell(cells, iNIS),
+      kelengkapan: getCell(cells, iKelengkapan),
+      materi:      []
     };
 
-    // Filter baris kosong / header
-    const nl = obj.nama.toLowerCase();
-    if (!obj.nama || nl === 'nama siswa' || nl === 'nama' || nl === 'no' || nl === '') return;
-
-    // Parse setiap grup materi
-    sortedNums.forEach(n => {
-      const grp = materiGroups[n];
-
-      // Nilai: ambil dari kolom pertama di nilaiIdx
-      // Kalau ada 2 kolom nilai (mis: kolom "nama materi" + kolom "nilai"),
-      // kolom pertama bisa berisi nama materi di baris data, kolom kedua berisi angka
-      let namaMateri = grp.namaFromHeader || `Materi ${n}`;
-      let nilai = '';
-
-      if (grp.nilaiIdx.length >= 2) {
-        // Kolom pertama: mungkin nama materi (teks), kolom kedua: nilai (angka/teks)
-        const v0 = getCell(grp.nilaiIdx[0]);
-        const v1 = getCell(grp.nilaiIdx[1]);
-        // Kalau v0 adalah angka → itu nilai, v1 juga nilai (ambil v0)
-        // Kalau v0 bukan angka dan tidak kosong → itu nama materi
-        if (v0 && isNaN(Number(v0)) && v0.toLowerCase() !== 'nilai') {
-          namaMateri = v0;  // nama materi dari data baris
-          nilai = v1;
-        } else {
-          nilai = v0 || v1;
-        }
-      } else if (grp.nilaiIdx.length === 1) {
-        nilai = getCell(grp.nilaiIdx[0]);
-      }
-
-      const status = grp.statusIdx >= 0 ? getCell(grp.statusIdx) : '';
-
-      // Hanya tambahkan kalau ada setidaknya nilai atau status
-      if (nilai || status) {
+    nums.forEach(n => {
+      const grp    = materiMap[n];
+      const nilai  = grp.nilaiIdx  >= 0 ? getCell(cells, grp.nilaiIdx)  : '';
+      const status = grp.statusIdx >= 0 ? getCell(cells, grp.statusIdx) : '';
+      // Sertakan materi walau nilai kosong asal statusnya ada (atau sebaliknya)
+      if (nilai !== '' || status !== '') {
         obj.materi.push({
-          key: `materi ${n}`,
-          nama: namaMateri,
-          nilai: nilai || '-',
+          key:    `materi ${n}`,
+          nama:   grp.namaMateri || `Materi ${n}`,
+          nilai:  nilai || '-',
           status: status
         });
       }
@@ -443,213 +447,178 @@ function parseGViz(json) {
   return results;
 }
 
-// ── Fetch via GViz JSONP ───────────────────────────────────────────────────────
+// ── Fetch sheet via GViz JSONP ─────────────────────────────────────────────────
 function fetchSheet(tabName) {
   return new Promise((resolve, reject) => {
-    const cbName = '_gviz_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-    const tqx    = encodeURIComponent(`out:json;responseHandler:${cbName}`);
-    const url    = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=${tqx}&sheet=${encodeURIComponent(tabName)}`;
+    const cb   = '_gviz_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+    const tqx  = encodeURIComponent(`out:json;responseHandler:${cb}`);
+    const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=${tqx}&sheet=${encodeURIComponent(tabName)}`;
+    const scr  = document.createElement('script');
+    const timer= setTimeout(()=>{ cleanup(); reject(new Error('Timeout — cek koneksi/visibilitas sheet')); }, 15000);
 
-    const script = document.createElement('script');
-    const timer  = setTimeout(() => { cleanup(); reject(new Error('Timeout 15s — cek koneksi atau visibilitas sheet')); }, 15000);
-
-    function cleanup() {
-      clearTimeout(timer);
-      delete window[cbName];
-      if (script.parentNode) script.parentNode.removeChild(script);
+    function cleanup(){
+      clearTimeout(timer); delete window[cb];
+      if(scr.parentNode) scr.parentNode.removeChild(scr);
     }
 
-    window[cbName] = function(json) {
+    window[cb] = json => {
       cleanup();
-      try {
-        // Simpan raw untuk debug
-        if (!window._gvizRaw) window._gvizRaw = {};
-        window._gvizRaw[tabName] = json;
-        resolve(parseGViz(json));
-      } catch(e) {
-        reject(new Error('Parse error: ' + e.message));
-      }
+      if(!window._gvizRaw) window._gvizRaw={};
+      window._gvizRaw[tabName] = json;
+      try { resolve(parseGViz(json)); }
+      catch(e){ reject(new Error('Parse error: '+e.message)); }
     };
-
-    script.onerror = () => { cleanup(); reject(new Error('Gagal load script (CORS / sheet tidak publik?)')); };
-    script.src = url;
-    document.head.appendChild(script);
+    scr.onerror = ()=>{ cleanup(); reject(new Error('Script load gagal — sheet belum publik?')); };
+    scr.src = url;
+    document.head.appendChild(scr);
   });
 }
 
-// ── showDebug ──────────────────────────────────────────────────────────────────
-function showDebug(type, html) {
-  let dbg = $('debugBox');
-  if (!dbg) {
-    dbg = document.createElement('div');
-    dbg.id = 'debugBox';
-    document.querySelector('.page').appendChild(dbg);
-  }
-  dbg.className = `debug-box ${type}`;
-  dbg.innerHTML = html;
+// ── Debug box ──────────────────────────────────────────────────────────────────
+function showDebug(cls, html){
+  let d=$('debugBox');
+  if(!d){ d=document.createElement('div'); d.id='debugBox'; document.querySelector('.page').appendChild(d); }
+  d.className='debug-box '+cls; d.innerHTML=html;
 }
 
-function buildDebugHtml(tabName) {
-  const raw = window._gvizRaw?.[tabName];
-  if (!raw) return '<b>Tidak ada raw GViz data tersimpan.</b>';
-  const cols    = raw.table?.cols?.map(c => c.label) || [];
-  const rowCount= raw.table?.rows?.length || 0;
-  const norm    = cols.map(normalizeColLabel);
-  return `<b>🔎 DEBUG — Sheet: ${tabName}</b><br>
-Kolom (${cols.length}):<br>
-${norm.slice(0,20).map((n,i)=>`[${i}] <em>${n||'(kosong)'}</em>`).join('<br>')}<br>
-${cols.length > 20 ? `…(+${cols.length-20} kolom lagi)<br>` : ''}
-Baris data: ${rowCount}<br>
-<br><b>Kolom pertama raw:</b> ${JSON.stringify(cols.slice(0,6))}<br>
-<br>Jika kolom tidak terdeteksi, pastikan header sheet persis:<br>
-"Nama Siswa" | "Kelas" | "Materi 1" | "Nilai" | "Materi 1 Status" | dst.`;
-}
-
-// ── Load all sheets ────────────────────────────────────────────────────────────
-async function loadAll() {
-  $('loading').style.display = 'block';
+// ── Load all ───────────────────────────────────────────────────────────────────
+async function loadAll(){
+  $('loading').style.display='block';
   $('result').classList.remove('show');
-  $('emptyState').style.display = 'none';
-  setStatus('', 'Mengambil data…');
-  setConn('', 'Memuat…');
-
+  $('emptyState').style.display='none';
+  setStatus('','Mengambil data…');
+  setConn('','Memuat…');
   try {
-    const [dIG, dIE, dMG, dME] = await Promise.all([
+    const [dIG,dIE,dMG,dME] = await Promise.all([
       fetchSheet(SHEETS.inst.ganjil),
       fetchSheet(SHEETS.inst.genap),
       fetchSheet(SHEETS.manaj.ganjil),
       fetchSheet(SHEETS.manaj.genap)
     ]);
+    data.inst.ganjil=dIG; data.inst.genap=dIE;
+    data.manaj.ganjil=dMG; data.manaj.genap=dME;
+    const total=dIG.length+dIE.length+dMG.length+dME.length;
 
-    data.inst.ganjil  = dIG;
-    data.inst.genap   = dIE;
-    data.manaj.ganjil = dMG;
-    data.manaj.genap  = dME;
-
-    const total = dIG.length + dIE.length + dMG.length + dME.length;
-
-    if (total === 0) {
-      setStatus('err', 'Data kosong — lihat DEBUG INFO di bawah');
-      setConn('err', 'Gagal');
+    if(total===0){
+      setStatus('err','Data kosong — lihat DEBUG INFO');
+      setConn('err','Gagal');
+      // Tampilkan debug kolom dari sheet pertama
+      const raw=window._gvizRaw?.[SHEETS.inst.ganjil];
+      const cols=(raw?.table?.cols||[]).map((c,i)=>`[${i}] ${normalizeLabel(c.label||'(kosong)')}`);
+      const rowCount=raw?.table?.rows?.length||0;
       showDebug('warn',
-        `<b>⚠️ Tidak ada siswa ter-parse.</b><br>
-Sheet berhasil diakses tapi parser tidak menemukan data.<br><br>
-${buildDebugHtml(SHEETS.inst.ganjil)}`
+        `<b>⚠️ Parser tidak menemukan siswa.</b><br>
+Sheet berhasil diakses. Baris data: ${rowCount}. Kolom terdeteksi (${cols.length}):<br>
+${cols.slice(0,12).join('<br>')}<br>
+${cols.length>12?`…(+${cols.length-12} lagi)<br>`:''}
+<br>Kolom nama siswa: ${$('searchInput')&&iNama>=0?'['+iNama+']':'TIDAK DITEMUKAN'}<br>
+<br><b>Kolom raw[0..5]:</b> ${JSON.stringify((raw?.table?.cols||[]).slice(0,6).map(c=>c.label))}`
       );
     } else {
-      setStatus('ok', `Injar: ${dIG.length}+${dIE.length} siswa · Manjar: ${dMG.length}+${dME.length} siswa`);
-      setConn('ok', 'Terhubung');
-      $('searchInput').disabled = false;
-      // Hapus debug box kalau ada
+      setStatus('ok',`Injar: ${dIG.length}+${dIE.length} siswa · Manjar: ${dMG.length}+${dME.length} siswa`);
+      setConn('ok','Terhubung');
+      $('searchInput').disabled=false;
       $('debugBox')?.remove();
     }
     updateCounts();
-  } catch(e) {
-    const msg = e?.message || String(e);
-    setStatus('err', 'Gagal: ' + msg);
-    setConn('err', 'Error');
+  } catch(e){
+    const msg=e?.message||String(e);
+    setStatus('err','Gagal: '+msg);
+    setConn('err','Error');
     showDebug('err',
-      `<b>❌ Gagal mengambil data</b><br>
-Error: ${msg}<br>
-Sheet ID: ${SHEET_ID}<br><br>
-<a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEETS.inst.ganjil}" target="_blank" style="color:#4F8EF7">→ Uji URL GViz di browser</a><br><br>
-Pastikan:<br>
-1. Sheet di-share "Anyone with the link can view"<br>
-2. Nama sheet tab persis: Injar_Ganjil, Injar_Genap, Manjar_Ganjil, Manjar_Genap`
+      `<b>❌ Gagal mengambil data</b><br>Error: ${msg}<br>Sheet ID: ${SHEET_ID}<br>
+<a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Injar_Ganjil" target="_blank" style="color:#4F8EF7">→ Uji URL GViz di browser</a><br>
+Pastikan sheet di-share "Anyone with the link can view"`
     );
   } finally {
-    $('loading').style.display = 'none';
+    $('loading').style.display='none';
   }
 }
 
-function updateCounts() {
-  const m  = state.mapel;
-  $('countGanjil').textContent = data[m].ganjil.length > 0 ? `${data[m].ganjil.length} siswa` : 'Tidak ada data';
-  $('countGenap').textContent  = data[m].genap.length  > 0 ? `${data[m].genap.length} siswa`  : 'Tidak ada data';
+function updateCounts(){
+  const m=state.mapel;
+  $('countGanjil').textContent=data[m].ganjil.length>0?`${data[m].ganjil.length} siswa`:'Tidak ada data';
+  $('countGenap').textContent =data[m].genap.length >0?`${data[m].genap.length} siswa` :'Tidak ada data';
 }
 
 // ── Switch mapel / sem ─────────────────────────────────────────────────────────
-function switchMapel(mapel) {
-  state.mapel = mapel;
-  document.querySelectorAll('.mapel-tab').forEach(t => t.classList.remove('active'));
+function switchMapel(mapel){
+  state.mapel=mapel;
+  document.querySelectorAll('.mapel-tab').forEach(t=>t.classList.remove('active'));
   document.querySelector(`.mapel-tab.${mapel}`).classList.add('active');
   resetSearch(); updateCounts();
 }
-function switchSem(sem) {
-  state.sem = sem;
-  document.querySelectorAll('.sem-tab').forEach(t => t.classList.remove('active'));
+function switchSem(sem){
+  state.sem=sem;
+  document.querySelectorAll('.sem-tab').forEach(t=>t.classList.remove('active'));
   document.querySelector(`.sem-tab.${sem}`).classList.add('active');
   resetSearch();
 }
-function resetSearch() {
-  $('searchInput').value = '';
+function resetSearch(){
+  $('searchInput').value='';
   $('dropdown').classList.remove('open');
   $('result').classList.remove('show');
-  $('emptyState').style.display = 'none';
-  const d = data[state.mapel][state.sem];
-  const tot = data[state.mapel].ganjil.length + data[state.mapel].genap.length;
-  if (d.length === 0 && tot > 0) $('emptyState').style.display = 'block';
+  $('emptyState').style.display='none';
+  const d=data[state.mapel][state.sem];
+  const tot=data[state.mapel].ganjil.length+data[state.mapel].genap.length;
+  if(d.length===0&&tot>0) $('emptyState').style.display='block';
 }
 
 // ── Autocomplete ───────────────────────────────────────────────────────────────
-const searchEl = $('searchInput');
-const ddEl     = $('dropdown');
-let selIdx = -1;
+const searchEl=$('searchInput'), ddEl=$('dropdown');
+let selIdx=-1;
 
-searchEl.addEventListener('input', () => {
-  const q = searchEl.value.trim().toLowerCase();
+searchEl.addEventListener('input',()=>{
+  const q=searchEl.value.trim().toLowerCase();
   $('result').classList.remove('show');
-  $('emptyState').style.display = 'none';
-  if (q.length < 2) { ddEl.classList.remove('open'); return; }
-
-  const d = data[state.mapel][state.sem];
-  state.filtered = d.filter(s => s.nama.toLowerCase().includes(q)).slice(0,8);
-  selIdx = -1;
-
-  ddEl.innerHTML = state.filtered.length === 0
-    ? `<div class="dd-empty">Tidak ada siswa "<strong>${searchEl.value}</strong>"</div>`
-    : state.filtered.map((s,i) => `
-        <div class="dd-item" onclick="pick(${i})">
-          <div class="dd-ava" style="background:${avaBg(s.nama)}">${ini(s.nama)}</div>
-          <div>
-            <div class="dd-name">${hl(s.nama,q)}</div>
-            <div class="dd-meta">${s.kelas||'—'} ${s.nis?'· NIS '+s.nis:''}</div>
-          </div>
-        </div>`).join('');
+  $('emptyState').style.display='none';
+  if(q.length<2){ ddEl.classList.remove('open'); return; }
+  const d=data[state.mapel][state.sem];
+  state.filtered=d.filter(s=>s.nama.toLowerCase().includes(q)).slice(0,8);
+  selIdx=-1;
+  ddEl.innerHTML=state.filtered.length===0
+    ?`<div class="dd-empty">Tidak ada siswa "<strong>${searchEl.value}</strong>"</div>`
+    :state.filtered.map((s,i)=>`
+      <div class="dd-item" onclick="pick(${i})">
+        <div class="dd-ava" style="background:${avaBg(s.nama)}">${ini(s.nama)}</div>
+        <div>
+          <div class="dd-name">${hl(s.nama,q)}</div>
+          <div class="dd-meta">${s.kelas||'—'} ${s.nis?'· NIS '+s.nis:''}</div>
+        </div>
+      </div>`).join('');
   ddEl.classList.add('open');
 });
 
-searchEl.addEventListener('keydown', e => {
-  const items = ddEl.querySelectorAll('.dd-item');
-  if (!items.length) return;
-  if (e.key==='ArrowDown') { selIdx=Math.min(selIdx+1,items.length-1); updActive(items); e.preventDefault(); }
-  if (e.key==='ArrowUp')   { selIdx=Math.max(selIdx-1,0); updActive(items); e.preventDefault(); }
-  if (e.key==='Enter'&&selIdx>=0) pick(selIdx);
-  if (e.key==='Escape') ddEl.classList.remove('open');
+searchEl.addEventListener('keydown',e=>{
+  const items=ddEl.querySelectorAll('.dd-item');
+  if(!items.length) return;
+  if(e.key==='ArrowDown'){selIdx=Math.min(selIdx+1,items.length-1);updActive(items);e.preventDefault();}
+  if(e.key==='ArrowUp')  {selIdx=Math.max(selIdx-1,0);updActive(items);e.preventDefault();}
+  if(e.key==='Enter'&&selIdx>=0) pick(selIdx);
+  if(e.key==='Escape') ddEl.classList.remove('open');
 });
+function updActive(items){ items.forEach((el,i)=>el.classList.toggle('focus',i===selIdx)); }
+document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) ddEl.classList.remove('open'); });
 
-function updActive(items) { items.forEach((el,i)=>el.classList.toggle('focus',i===selIdx)); }
-document.addEventListener('click', e => { if (!e.target.closest('.search-wrap')) ddEl.classList.remove('open'); });
-
-function pick(idx) {
-  const s = state.filtered[idx];
+function pick(idx){
+  const s=state.filtered[idx];
   ddEl.classList.remove('open');
-  searchEl.value = s.nama;
+  searchEl.value=s.nama;
   renderResult(s);
 }
 
 // ── Render result ──────────────────────────────────────────────────────────────
-function renderResult(s) {
+function renderResult(s){
   const total  = s.materi.length;
-  const tuntas = s.materi.filter(m => /tuntas/i.test(m.status) && !/belum/i.test(m.status)).length;
-  const belum  = total - tuntas;
-  const pct    = total > 0 ? Math.round(tuntas/total*100) : 0;
-  const isLengkap  = /lengkap/i.test(s.kelengkapan) && !/tidak/i.test(s.kelengkapan);
-  const semLabel   = state.sem === 'ganjil' ? 'Semester Ganjil' : 'Semester Genap';
-  const mapelLabel = state.mapel === 'inst' ? 'Instalasi Jaringan' : 'Manajemen Jaringan';
+  const tuntas = s.materi.filter(m=>/tuntas/i.test(m.status)&&!/belum/i.test(m.status)).length;
+  const belum  = total-tuntas;
+  const pct    = total>0?Math.round(tuntas/total*100):0;
+  const isLengkap = /lengkap/i.test(s.kelengkapan)&&!/tidak/i.test(s.kelengkapan);
+  const semLabel   = state.sem==='ganjil'?'Semester Ganjil':'Semester Genap';
+  const mapelLabel = state.mapel==='inst'?'Instalasi Jaringan':'Manajemen Jaringan';
   const mapelCls   = state.mapel;
 
-  $('result').innerHTML = `
+  $('result').innerHTML=`
     <div class="prof-strip">
       <div class="prof-ava" style="background:linear-gradient(135deg,${avaBg(s.nama)},${avaBg(s.nama+'x')})">${ini(s.nama)}</div>
       <div class="prof-meta">
@@ -675,15 +644,15 @@ function renderResult(s) {
     <div class="materi-wrap">
       <div class="mat-section-title">Detail Setiap Materi</div>
       <div class="materi-grid">
-        ${total === 0
-          ? `<p style="color:var(--txt3);font-size:13px;grid-column:1/-1">Tidak ada data materi ditemukan.</p>`
-          : s.materi.map((m,i) => {
-              const ok = /tuntas/i.test(m.status) && !/belum/i.test(m.status);
+        ${total===0
+          ?`<p style="color:var(--txt3);font-size:13px;grid-column:1/-1">Tidak ada data materi.</p>`
+          :s.materi.map((m,i)=>{
+              const ok=/tuntas/i.test(m.status)&&!/belum/i.test(m.status);
               return `<div class="mat-card ${ok?'t':'b'}" style="animation-delay:${i*.03}s">
                 <div class="mat-idx">${String(i+1).padStart(2,'0')}</div>
                 <div class="mat-info">
                   <div class="mat-name">${m.nama}</div>
-                  <div class="mat-nilai">Nilai: <strong>${m.nilai||'—'}</strong></div>
+                  <div class="mat-nilai">Nilai: <strong>${m.nilai}</strong></div>
                 </div>
                 <div class="mat-chip">${m.status||'Belum'}</div>
               </div>`;
@@ -693,8 +662,8 @@ function renderResult(s) {
     </div>`;
 
   $('result').classList.add('show');
-  $('result').scrollIntoView({ behavior:'smooth', block:'nearest' });
-  setTimeout(() => { const f=$('pFill'); if(f) f.style.width=pct+'%'; }, 80);
+  $('result').scrollIntoView({behavior:'smooth',block:'nearest'});
+  setTimeout(()=>{ const f=$('pFill'); if(f) f.style.width=pct+'%'; },80);
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────────
