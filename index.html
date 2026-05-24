@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Laporan Ketuntasan — INJAR & MANJAR</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -16,8 +16,6 @@
   --green:#34D399; --green-dim:rgba(52,211,153,0.1);
   --red:#F87171; --red-dim:rgba(248,113,113,0.1);
   --amber:#FBBF24; --amber-dim:rgba(251,191,36,0.12);
-
-  /* Kategori kompetensi */
   --bawah-bg:#EF4444; --bawah-txt:#ffffff;
   --standar-bg:#3B82F6; --standar-txt:#000000;
   --atas-bg:#22C55E; --atas-txt:#000000;
@@ -37,6 +35,7 @@ body::after {
 
 .page { position:relative; z-index:1; max-width:960px; margin:0 auto; padding:32px 16px 80px; }
 
+/* ── Topbar ── */
 .topbar { display:flex; align-items:center; gap:12px; margin-bottom:36px; animation:fadeSlideDown .7s cubic-bezier(.16,1,.3,1) both; }
 .logo-mark { width:40px; height:40px; border-radius:10px; flex-shrink:0; background:linear-gradient(135deg,var(--blue),var(--violet)); display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:#fff; box-shadow:0 0 24px var(--blue-glow); }
 .topbar-info { flex:1; min-width:0; }
@@ -47,16 +46,17 @@ body::after {
 .conn-dot.live { background:var(--green); box-shadow:0 0 8px var(--green); }
 .conn-dot.err  { background:var(--red); }
 .conn-label-text { display:none; }
-@media(min-width:420px) { .conn-label-text { display:inline; } }
+@media(min-width:420px){ .conn-label-text { display:inline; } }
 
-.hero { margin-bottom:28px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .1s both; }
+/* ── Hero ── */
+.hero { margin-bottom:20px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .1s both; }
 .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(30px,7vw,52px); font-weight:800; line-height:1.08; letter-spacing:-1px; background:linear-gradient(135deg,#E8ECF4 0%,#6B7A99 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .hero h1 span { background:linear-gradient(135deg,var(--blue),var(--violet)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .hero-desc { margin-top:10px; font-size:14px; color:var(--txt2); line-height:1.6; max-width:420px; }
 
-/* Legend kompetensi */
-.legend-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .12s both; }
-.legend-item { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600; }
+/* ── Legend ── */
+.legend-row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:20px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .12s both; }
+.legend-item { display:flex; align-items:center; gap:5px; font-size:11px; font-weight:600; }
 .legend-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
 .legend-dot.bawah  { background:var(--bawah-bg); }
 .legend-dot.standar{ background:var(--standar-bg); }
@@ -64,10 +64,11 @@ body::after {
 .legend-item.bawah  { color:#F87171; }
 .legend-item.standar{ color:#60A5FA; }
 .legend-item.atas   { color:#4ADE80; }
-.legend-sep { color:var(--txt3); font-size:11px; align-self:center; }
+.legend-sep { color:var(--txt3); font-size:11px; }
 
+/* ── Mapel tabs ── */
 .mapel-tabs { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .15s both; }
-.mapel-tab { padding:14px 16px; border-radius:14px; border:1px solid var(--edge); background:var(--ink2); cursor:pointer; transition:all .25s; position:relative; overflow:hidden; -webkit-tap-highlight-color:transparent; }
+.mapel-tab { padding:14px 16px; border-radius:14px; border:1px solid var(--edge); background:var(--ink2); cursor:pointer; transition:all .25s; position:relative; overflow:hidden; -webkit-tap-highlight-color:transparent; min-height:44px; }
 .mapel-tab::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity .25s; }
 .mapel-tab.inst::before  { background:linear-gradient(135deg,var(--blue-dim),transparent); }
 .mapel-tab.manaj::before { background:linear-gradient(135deg,var(--amber-dim),transparent); }
@@ -82,8 +83,9 @@ body::after {
 .mapel-tab.active.inst  .mapel-badge { display:block; background:var(--blue-dim); color:var(--blue); }
 .mapel-tab.active.manaj .mapel-badge { display:block; background:var(--amber-dim); color:var(--amber); }
 
+/* ── Semester tabs ── */
 .sem-tabs { display:flex; gap:8px; margin-bottom:20px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .2s both; }
-.sem-tab { flex:1; padding:12px 14px; border-radius:12px; border:1px solid var(--edge); background:var(--ink2); cursor:pointer; text-align:center; transition:all .25s; position:relative; overflow:hidden; -webkit-tap-highlight-color:transparent; }
+.sem-tab { flex:1; padding:12px 14px; border-radius:12px; border:1px solid var(--edge); background:var(--ink2); cursor:pointer; text-align:center; transition:all .25s; position:relative; overflow:hidden; -webkit-tap-highlight-color:transparent; min-height:44px; }
 .sem-tab::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity .25s; }
 .sem-tab.ganjil::before { background:linear-gradient(135deg,var(--blue-dim),transparent); }
 .sem-tab.genap::before  { background:linear-gradient(135deg,var(--violet-dim),transparent); }
@@ -98,97 +100,115 @@ body::after {
 .sem-tab.active.ganjil .sem-badge { display:block; }
 .sem-tab.active.genap  .sem-badge { display:block; background:var(--violet-dim); color:var(--violet); }
 
+/* ── Search ── */
 .search-wrap { position:relative; margin-bottom:14px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .24s both; }
 .search-ico { position:absolute; left:16px; top:50%; transform:translateY(-50%); pointer-events:none; opacity:.4; }
-.search-input { width:100%; background:var(--ink2); border:1.5px solid var(--edge2); border-radius:14px; padding:16px 16px 16px 48px; font-family:'DM Sans',sans-serif; font-size:16px; font-weight:500; color:var(--txt); outline:none; transition:border-color .25s,box-shadow .25s; -webkit-appearance:none; }
+.search-clear { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:var(--ink3); border:none; color:var(--txt2); width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:16px; display:none; align-items:center; justify-content:center; transition:background .2s, color .2s; -webkit-tap-highlight-color:transparent; }
+.search-clear.show { display:flex; }
+.search-clear:hover { background:var(--red-dim); color:var(--red); }
+.search-input { width:100%; background:var(--ink2); border:1.5px solid var(--edge2); border-radius:14px; padding:16px 44px 16px 48px; font-family:'DM Sans',sans-serif; font-size:16px; font-weight:500; color:var(--txt); outline:none; transition:border-color .25s,box-shadow .25s; -webkit-appearance:none; }
 .search-input::placeholder { color:var(--txt3); font-weight:400; }
 .search-input:focus { border-color:var(--blue); box-shadow:0 0 0 4px var(--blue-dim); }
 .search-input:disabled { opacity:.4; cursor:not-allowed; }
-.dropdown { position:absolute; top:calc(100% + 8px); left:0; right:0; background:var(--ink2); border:1px solid var(--edge2); border-radius:14px; overflow:hidden; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.6); display:none; max-height:60vh; overflow-y:auto; }
+.dropdown { position:absolute; top:calc(100% + 8px); left:0; right:0; background:var(--ink2); border:1px solid var(--edge2); border-radius:14px; overflow:hidden; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,.6); display:none; max-height:55vh; overflow-y:auto; -webkit-overflow-scrolling:touch; }
 .dropdown.open { display:block; animation:popUp .18s cubic-bezier(.16,1,.3,1); }
-.dd-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; border-bottom:1px solid var(--edge); transition:background .15s; -webkit-tap-highlight-color:transparent; }
+.dd-item { display:flex; align-items:center; gap:12px; padding:14px 16px; cursor:pointer; border-bottom:1px solid var(--edge); transition:background .15s; -webkit-tap-highlight-color:transparent; min-height:56px; }
 .dd-item:last-child { border-bottom:none; }
 .dd-item:hover,.dd-item.focus,.dd-item:active { background:var(--ink3); }
-.dd-ava { width:34px; height:34px; border-radius:9px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:12px; font-weight:800; color:#fff; }
+.dd-ava { width:36px; height:36px; border-radius:9px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:12px; font-weight:800; color:#fff; }
 .dd-name { font-size:14px; font-weight:500; color:var(--txt); }
-.dd-meta { font-size:11px; color:var(--txt3); margin-top:1px; }
-.dd-empty { padding:20px; text-align:center; color:var(--txt3); font-size:13px; }
+.dd-meta { font-size:11px; color:var(--txt3); margin-top:2px; }
+.dd-empty { padding:24px; text-align:center; color:var(--txt3); font-size:13px; }
 mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; padding:0 2px; }
 
-.status-line { display:flex; align-items:center; gap:8px; margin-bottom:28px; font-size:12px; color:var(--txt3); font-family:'DM Mono',monospace; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .28s both; }
-.s-dot { width:6px; height:6px; border-radius:50%; background:var(--txt3); flex-shrink:0; }
+/* ── Status ── */
+.status-line { display:flex; align-items:flex-start; gap:8px; margin-bottom:28px; font-size:12px; color:var(--txt3); font-family:'DM Mono',monospace; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .28s both; }
+.s-dot { width:6px; height:6px; border-radius:50%; background:var(--txt3); flex-shrink:0; margin-top:3px; }
 .s-dot.ok  { background:var(--green); box-shadow:0 0 8px var(--green); animation:pulse 2s infinite; }
 .s-dot.err { background:var(--red); }
-#sText { font-size:11px; line-height:1.5; }
+#sText { font-size:11px; line-height:1.6; word-break:break-word; }
 
+/* ── Result ── */
 .result { display:none; }
 .result.show { display:block; animation:fadeSlideUp .5s cubic-bezier(.16,1,.3,1) both; }
-.prof-strip { background:var(--ink2); border:1px solid var(--edge); border-radius:16px 16px 0 0; padding:20px; display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap; border-bottom:none; position:relative; overflow:hidden; row-gap:10px; }
+
+/* Prof strip */
+.prof-strip { background:var(--ink2); border:1px solid var(--edge); border-radius:16px 16px 0 0; padding:20px; display:flex; align-items:flex-start; gap:14px; flex-wrap:wrap; row-gap:12px; border-bottom:none; position:relative; overflow:hidden; }
 .prof-strip::before { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(135deg,var(--blue-dim),var(--violet-dim)); }
 .prof-ava { width:52px; height:52px; border-radius:14px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:19px; font-weight:800; color:#fff; position:relative; box-shadow:0 6px 20px rgba(0,0,0,.3); }
 .prof-meta { flex:1; min-width:0; position:relative; }
 .prof-name { font-family:'Syne',sans-serif; font-size:19px; font-weight:800; color:var(--txt); letter-spacing:-.5px; line-height:1.2; word-break:break-word; }
-.prof-kelas { font-size:12px; color:var(--txt2); margin-top:6px; display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.prof-kelas { font-size:12px; color:var(--txt2); margin-top:6px; display:flex; gap:6px; align-items:center; flex-wrap:wrap; row-gap:5px; }
 .kbadge { font-size:10px; font-weight:700; padding:3px 9px; border-radius:100px; background:var(--blue-dim); color:var(--blue); letter-spacing:.5px; }
 .mapel-pill { font-size:10px; font-weight:700; padding:3px 9px; border-radius:100px; letter-spacing:.5px; }
 .mapel-pill.inst  { background:var(--blue-dim); color:var(--blue); }
 .mapel-pill.manaj { background:var(--amber-dim); color:var(--amber); }
-.kel-badge { position:relative; padding:7px 14px; border-radius:100px; font-size:11px; font-weight:700; letter-spacing:.5px; display:inline-flex; align-items:center; gap:5px; white-space:nowrap; flex-shrink:0; }
+.kel-badge { position:relative; padding:7px 13px; border-radius:100px; font-size:11px; font-weight:700; letter-spacing:.5px; display:inline-flex; align-items:center; gap:5px; white-space:nowrap; flex-shrink:0; }
 .kel-badge.ok { background:var(--green-dim); color:var(--green); border:1px solid rgba(52,211,153,.3); }
 .kel-badge.no { background:var(--red-dim);   color:var(--red);   border:1px solid rgba(248,113,113,.3); }
 
-/* ── Stat row: sekarang 4 kolom (Total, Bawah, Standar, Atas) ── */
+/* Reset button */
+.reset-btn { width:100%; margin-top:0; border:1px solid var(--edge2); border-top:none; background:var(--ink2); color:var(--txt2); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; padding:12px; cursor:pointer; transition:background .2s, color .2s; -webkit-tap-highlight-color:transparent; display:flex; align-items:center; justify-content:center; gap:6px; }
+.reset-btn:hover, .reset-btn:active { background:var(--ink3); color:var(--txt); }
+
+/* Stat row — 4 kolom di desktop, 2×2 di mobile */
 .stat-row { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--edge); border-top:none; background:var(--ink2); overflow:hidden; }
-.stat-box { padding:14px 8px; text-align:center; border-right:1px solid var(--edge); }
+.stat-box { padding:16px 8px; text-align:center; border-right:1px solid var(--edge); }
 .stat-box:last-child { border-right:none; }
-.stat-num { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1; }
-.stat-num.c-blue  { color:var(--blue); }
-.stat-num.c-red   { color:#F87171; }
+.stat-num { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1; }
+.stat-num.c-blue   { color:var(--blue); }
+.stat-num.c-red    { color:#F87171; }
 .stat-num.c-standar{ color:#60A5FA; }
-.stat-num.c-atas  { color:#4ADE80; }
-.stat-lbl { font-size:8px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:.8px; margin-top:5px; line-height:1.3; }
+.stat-num.c-atas   { color:#4ADE80; }
+.stat-lbl { font-size:8px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:.8px; margin-top:5px; line-height:1.4; }
 
+/* Progress */
 .prog-strip { background:var(--ink2); border:1px solid var(--edge); border-top:none; padding:14px 20px; }
-.prog-head { display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px; }
-.prog-label { color:var(--txt2); font-weight:500; }
-.prog-pct { font-family:'DM Mono',monospace; font-weight:600; color:var(--atas-bg); }
-
-/* Progress bar sekarang 3 segmen */
-.prog-track { height:7px; background:var(--ink3); border-radius:100px; overflow:hidden; display:flex; }
-.prog-seg { height:100%; transition:width 1s cubic-bezier(.16,1,.3,1); }
+.prog-head { display:flex; justify-content:space-between; align-items:flex-start; font-size:12px; margin-bottom:10px; gap:8px; }
+.prog-label { color:var(--txt2); font-weight:500; flex-shrink:0; }
+.prog-pct { font-family:'DM Mono',monospace; font-weight:600; color:var(--txt2); font-size:11px; text-align:right; line-height:1.5; }
+.prog-track { height:8px; background:var(--ink3); border-radius:100px; overflow:hidden; display:flex; gap:2px; }
+.prog-seg { height:100%; transition:width 1s cubic-bezier(.16,1,.3,1); border-radius:100px; min-width:0; }
 .prog-seg.bawah   { background:var(--bawah-bg); }
 .prog-seg.standar { background:var(--standar-bg); }
 .prog-seg.atas    { background:var(--atas-bg); }
 
+/* Ringkasan kelas */
+.kelas-summary { background:var(--ink2); border:1px solid var(--edge); border-top:none; padding:14px 20px; }
+.kelas-summary-title { font-size:10px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:2px; margin-bottom:10px; }
+.kelas-bars { display:flex; flex-direction:column; gap:6px; }
+.kelas-bar-row { display:flex; align-items:center; gap:8px; font-size:11px; }
+.kelas-bar-label { width:90px; flex-shrink:0; color:var(--txt2); font-weight:500; font-size:10px; }
+.kelas-bar-track { flex:1; height:5px; background:var(--ink3); border-radius:100px; overflow:hidden; }
+.kelas-bar-fill { height:100%; border-radius:100px; transition:width 1.2s cubic-bezier(.16,1,.3,1); }
+.kelas-bar-fill.atas    { background:var(--atas-bg); }
+.kelas-bar-fill.standar { background:var(--standar-bg); }
+.kelas-bar-fill.bawah   { background:var(--bawah-bg); }
+.kelas-bar-pct { width:32px; text-align:right; font-family:'DM Mono',monospace; font-size:10px; color:var(--txt3); flex-shrink:0; }
+
+/* Materi */
 .materi-wrap { background:var(--ink2); border:1px solid var(--edge); border-top:none; border-radius:0 0 16px 16px; padding:18px 16px; }
 .mat-section-title { font-size:10px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
 .materi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; }
-
-/* ── Kartu materi: 3 varian ── */
 .mat-card { border-radius:12px; padding:12px 14px; display:flex; align-items:center; gap:10px; border:1px solid; transition:transform .15s,box-shadow .15s; cursor:default; animation:matIn .3s ease both; }
 .mat-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.3); }
-
-/* Bawah Kompetensi — merah */
-.mat-card.bawah  { background:rgba(239,68,68,0.12); border-color:rgba(239,68,68,0.25); }
-/* Standar — biru */
+.mat-card.bawah  { background:rgba(239,68,68,0.12);  border-color:rgba(239,68,68,0.25); }
 .mat-card.standar{ background:rgba(59,130,246,0.12); border-color:rgba(59,130,246,0.25); }
-/* Atas Kompetensi — hijau */
 .mat-card.atas   { background:rgba(34,197,94,0.12);  border-color:rgba(34,197,94,0.25); }
-
+.mat-card.kosong { background:var(--ink3); border-color:var(--edge2); }
 .mat-idx { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'DM Mono',monospace; font-size:10px; font-weight:600; }
 .bawah  .mat-idx { background:rgba(239,68,68,.2);  color:#F87171; }
 .standar .mat-idx{ background:rgba(59,130,246,.2); color:#93C5FD; }
 .atas   .mat-idx { background:rgba(34,197,94,.2);  color:#86EFAC; }
-
+.kosong .mat-idx { background:var(--ink2); color:var(--txt3); }
 .mat-info { flex:1; min-width:0; }
-.mat-name { font-size:12px; font-weight:500; color:var(--txt); white-space:normal; overflow:visible; margin-bottom:2px; line-height:1.4; }
+.mat-name { font-size:12px; font-weight:500; color:var(--txt); white-space:normal; margin-bottom:2px; line-height:1.4; }
 .mat-nilai { font-size:11px; font-family:'DM Mono',monospace; color:var(--txt3); }
-
-/* Chip — solid background sesuai kategori */
-.mat-chip { font-size:9px; font-weight:700; padding:3px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
+.mat-chip { font-size:9px; font-weight:700; padding:3px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; flex-shrink:0; }
 .bawah  .mat-chip { background:var(--bawah-bg);  color:var(--bawah-txt); }
 .standar .mat-chip{ background:var(--standar-bg); color:var(--standar-txt); }
 .atas   .mat-chip { background:var(--atas-bg);   color:var(--atas-txt); }
+.kosong .mat-chip { background:var(--ink3); color:var(--txt3); border:1px solid var(--edge2); }
 
 .debug-box { margin-top:16px; padding:14px 16px; border-radius:12px; font-size:11px; line-height:1.8; word-break:break-all; }
 .debug-box.warn { background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.3); color:#FBBF24; }
@@ -207,55 +227,59 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
 @keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:.4} }
 @keyframes matIn  { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
-@media(max-width:480px) {
+/* ── MOBILE ≤ 480px ── */
+@media(max-width:480px){
   .page { padding:20px 12px 70px; }
   .mapel-tabs { gap:8px; }
   .mapel-tab { padding:12px; }
   .mapel-emoji { font-size:18px; margin-bottom:4px; }
   .mapel-name { font-size:12px; }
   .hero h1 { letter-spacing:-.5px; }
-
-  /* Prof strip: stack avatar + info, badge ke bawah */
-  .prof-strip { flex-direction:column; gap:12px; padding:14px; }
-  .prof-ava { width:42px; height:42px; font-size:15px; }
-  .prof-name { font-size:16px; }
-  .kel-badge { align-self:flex-start; font-size:10px; padding:5px 10px; }
-
-  /* Stat row: 2x2 grid agar tiap kotak lebih lega */
-  .stat-row { grid-template-columns:1fr 1fr; }
-  .stat-box { padding:12px 6px; border-right:1px solid var(--edge); border-bottom:1px solid var(--edge); }
-  .stat-box:nth-child(2) { border-right:none; }
-  .stat-box:nth-child(3) { border-bottom:none; }
-  .stat-box:nth-child(4) { border-right:none; border-bottom:none; }
-  .stat-num { font-size:26px; }
-  .stat-lbl { font-size:8px; }
-
-  /* Progress: teks distribusi singkat */
-  .prog-pct { font-size:10px; text-align:right; max-width:55%; line-height:1.4; }
-  .prog-head { align-items:flex-start; }
-
-  /* Materi grid: 1 kolom penuh agar chip tidak overflow */
-  .materi-grid { grid-template-columns:1fr; }
-  .mat-name { font-size:12px; }
-  .mat-chip { font-size:8px; padding:3px 7px; white-space:normal; text-align:center; line-height:1.3; }
-
-  /* Legend: wrap rapi */
   .legend-row { gap:6px; }
   .legend-item { font-size:10px; }
   .legend-sep { display:none; }
+
+  /* Prof strip: kolom atas = ava+meta, bawah = badge */
+  .prof-strip { padding:14px; gap:10px; row-gap:10px; }
+  .prof-ava { width:42px; height:42px; font-size:15px; }
+  .prof-name { font-size:16px; }
+  .kel-badge { font-size:10px; padding:5px 10px; }
+
+  /* Stat row: 2×2 */
+  .stat-row { grid-template-columns:1fr 1fr; }
+  .stat-box { padding:12px 6px; border-bottom:1px solid var(--edge); }
+  .stat-box:nth-child(2) { border-right:none; }
+  .stat-box:nth-child(3) { border-bottom:none; }
+  .stat-box:nth-child(4) { border-right:none; border-bottom:none; }
+  .stat-num { font-size:24px; }
+  .stat-lbl { font-size:8px; }
+
+  /* Progress */
+  .prog-strip { padding:12px 14px; }
+  .prog-pct { font-size:10px; }
+
+  /* Ringkasan kelas */
+  .kelas-summary { padding:12px 14px; }
+  .kelas-bar-label { width:76px; }
+
+  /* Materi: 1 kolom */
+  .materi-grid { grid-template-columns:1fr; }
+  .materi-wrap { padding:14px 12px; }
+  .mat-name { font-size:11px; }
+  .mat-chip { font-size:8px; padding:3px 7px; }
+
+  /* Tombol reset */
+  .reset-btn { padding:14px; font-size:14px; }
 }
 
-@media(max-width:360px) {
+/* ── MOBILE kecil ≤ 360px ── */
+@media(max-width:360px){
   .prof-strip { padding:12px; }
   .prof-name { font-size:14px; }
-  .stat-num { font-size:22px; }
+  .stat-num { font-size:20px; }
   .mapel-name { font-size:11px; }
   .sem-tab-label { font-size:11px; }
-}
-
-@media(max-width:340px) {
-  .materi-grid { grid-template-columns:1fr; }
-  .stat-row { grid-template-columns:1fr 1fr; }
+  .kelas-bar-label { width:64px; font-size:9px; }
 }
 </style>
 </head>
@@ -280,7 +304,6 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
     <p class="hero-desc">Pilih mata pelajaran & semester, lalu cari nama siswa untuk melihat ketuntasan materi.</p>
   </div>
 
-  <!-- Legend kategori kompetensi -->
   <div class="legend-row">
     <div class="legend-item bawah"><div class="legend-dot bawah"></div>Bawah Kompetensi (&lt;80)</div>
     <span class="legend-sep">·</span>
@@ -324,6 +347,7 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
       <svg width="18" height="18" fill="none" stroke="#8B93A8" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
     </span>
     <input class="search-input" id="searchInput" placeholder="Ketik nama siswa…" autocomplete="off" disabled>
+    <button class="search-clear" id="searchClear" aria-label="Hapus pencarian">✕</button>
     <div class="dropdown" id="dropdown"></div>
   </div>
 
@@ -342,26 +366,21 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
 // ── Konfigurasi ────────────────────────────────────────────────────────────────
 const SHEET_ID = '1pY12U7aHnLN1e7hdUWvofK1DTntk274uU1uFIvFhZDg';
 const SHEETS = {
-  inst:  { ganjil: 'Injar_Ganjil',  genap: 'Injar_Genap'  },
-  manaj: { ganjil: 'Manjar_Ganjil', genap: 'Manjar_Genap' }
+  inst:  { ganjil:'Injar_Ganjil',  genap:'Injar_Genap'  },
+  manaj: { ganjil:'Manjar_Ganjil', genap:'Manjar_Genap' }
 };
 
-// ── Kategori kompetensi berdasarkan nilai ──────────────────────────────────────
-// < 80   → Bawah Kompetensi  (merah, teks putih)
-// 80–89  → Standar           (biru, teks hitam)
-// ≥ 90   → Atas Kompetensi  (hijau, teks hitam)
+// ── Kategori (FIX: nilai kosong → 'kosong', bukan paksa 'bawah') ─────────────
 function getKategori(nilaiStr) {
-  const n = parseFloat(String(nilaiStr).replace(',','.'));
-  if (isNaN(n)) return 'bawah';   // nilai tidak terbaca → anggap belum
+  const s = String(nilaiStr).trim();
+  if (!s || s === '-' || s === '') return 'kosong';
+  const n = parseFloat(s.replace(',','.'));
+  if (isNaN(n)) return 'kosong';
   if (n >= 90)  return 'atas';
   if (n >= 80)  return 'standar';
   return 'bawah';
 }
-const LABEL_MAP = {
-  bawah:   'Bawah Kompetensi',
-  standar: 'Standar',
-  atas:    'Atas Kompetensi'
-};
+const LABEL_MAP = { bawah:'Bawah Kompetensi', standar:'Standar', atas:'Atas Kompetensi', kosong:'Belum Ada Nilai' };
 
 // ── State ──────────────────────────────────────────────────────────────────────
 const data  = { inst:{ganjil:[],genap:[]}, manaj:{ganjil:[],genap:[]} };
@@ -371,17 +390,17 @@ const state = { mapel:'inst', sem:'ganjil', filtered:[] };
 const $    = id => document.getElementById(id);
 const hl   = (t,q) => t.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi'),'<mark>$1</mark>');
 const ini  = n => n.split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
-const avaBg= n => {
-  const c=['#4F8EF7','#8B5CF6','#34D399','#F59E0B','#EC4899','#06B6D4'];
-  return c[n.charCodeAt(0)%c.length];
-};
-function setConn(type,label){
-  $('connDot').className='conn-dot'+(type==='ok'?' live':type==='err'?' err':'');
-  $('connLabel').textContent=label;
-}
-function setStatus(type,msg){
-  $('sDot').className='s-dot'+(type==='ok'?' ok':type==='err'?' err':'');
-  $('sText').textContent=msg;
+const avaBg= n => { const c=['#4F8EF7','#8B5CF6','#34D399','#F59E0B','#EC4899','#06B6D4']; return c[n.charCodeAt(0)%c.length]; };
+function setConn(type,label){ $('connDot').className='conn-dot'+(type==='ok'?' live':type==='err'?' err':''); $('connLabel').textContent=label; }
+function setStatus(type,msg){ $('sDot').className='s-dot'+(type==='ok'?' ok':type==='err'?' err':''); $('sText').textContent=msg; }
+
+// FIX: hitung width segmen tanpa rounding error ────────────────────────────────
+function calcSegments(bawah, standar, atas, total) {
+  if (total === 0) return { pB:0, pS:0, pA:0 };
+  const pB = Math.round(bawah / total * 100);
+  const pS = Math.round(standar / total * 100);
+  const pA = 100 - pB - pS;   // sisanya → tidak ada rounding drift
+  return { pB, pS, pA: Math.max(0, pA) };
 }
 
 // ── Normalisasi label kolom GViz ───────────────────────────────────────────────
@@ -411,21 +430,15 @@ function normalizeLabel(raw) {
 function parseGViz(json) {
   const rawCols = json.table?.cols || [];
   const rows    = json.table?.rows || [];
+  const cols = rawCols.map((c,i) => ({ i, raw:c.label||'', lbl:normalizeLabel(c.label||'') }));
 
-  const cols = rawCols.map((c,i) => ({
-    i,
-    raw: c.label || '',
-    lbl: normalizeLabel(c.label || '')
-  }));
-
-  let iNama = -1, iKelas = -1, iNIS = -1, iKelengkapan = -1;
-
+  let iNama=-1, iKelas=-1, iNIS=-1, iKelengkapan=-1;
   cols.forEach(c => {
     const l = c.lbl.toLowerCase();
-    if (iNama < 0 && /^nama\s+siswa$/.test(l)) { iNama = c.i; return; }
-    if (iKelas < 0 && /^kelas$/.test(l))        { iKelas = c.i; return; }
-    if (iNIS   < 0 && /^no\.?\s*induk$|^nisn?$/.test(l)) { iNIS = c.i; return; }
-    if (iKelengkapan < 0 && /kelengkapan|status\s+kel/i.test(l)) { iKelengkapan = c.i; return; }
+    if (iNama<0 && /^nama\s+siswa$/.test(l))              { iNama=c.i; return; }
+    if (iKelas<0 && /^kelas$/.test(l))                    { iKelas=c.i; return; }
+    if (iNIS<0 && /^no\.?\s*induk$|^nisn?$/.test(l))      { iNIS=c.i; return; }
+    if (iKelengkapan<0 && /kelengkapan|status\s+kel/i.test(l)) { iKelengkapan=c.i; return; }
   });
 
   const reStatus = /^Materi\s+(\d+)\s+Status\b/i;
@@ -433,18 +446,16 @@ function parseGViz(json) {
   const materiMap = {};
 
   cols.forEach(c => {
-    const lbl = c.lbl;
-    const mSt = lbl.match(reStatus);
+    const mSt = c.lbl.match(reStatus);
     if (mSt) {
       const n = parseInt(mSt[1]);
       if (!materiMap[n]) materiMap[n] = { nilaiIdx:-1, statusIdx:-1, namaMateri:'' };
-      materiMap[n].statusIdx = c.i;
-      return;
+      materiMap[n].statusIdx = c.i; return;
     }
-    const mNilai = lbl.match(reNilai);
+    const mNilai = c.lbl.match(reNilai);
     if (mNilai) {
-      const n    = parseInt(mNilai[1]);
-      let nama = (mNilai[2] || '').trim().replace(/\s*nilai\s*$/i,'').trim();
+      const n = parseInt(mNilai[1]);
+      let nama = (mNilai[2]||'').trim().replace(/\s*nilai\s*$/i,'').trim();
       if (!nama) nama = `Materi ${n}`;
       if (!materiMap[n]) materiMap[n] = { nilaiIdx:-1, statusIdx:-1, namaMateri:'' };
       materiMap[n].nilaiIdx   = c.i;
@@ -453,79 +464,56 @@ function parseGViz(json) {
   });
 
   const nums = Object.keys(materiMap).map(Number).sort((a,b)=>a-b);
-
   const getCell = (cells, idx) => {
-    if (idx < 0 || idx >= cells.length) return '';
+    if (idx<0 || idx>=cells.length) return '';
     const v = cells[idx]?.v;
-    if (v === null || v === undefined) return '';
-    return String(v).trim();
+    return (v===null||v===undefined) ? '' : String(v).trim();
   };
 
-  const results = [];
-
-  rows.forEach(row => {
-    const cells = row.c || [];
+  return rows.reduce((acc, row) => {
+    const cells = row.c||[];
     const nama  = getCell(cells, iNama);
-    const nl = nama.toLowerCase();
-    if (!nama || /^nama(\s+siswa)?$/.test(nl) || /^no\.?$/.test(nl)) return;
-
+    const nl    = nama.toLowerCase();
+    if (!nama || /^nama(\s+siswa)?$/.test(nl) || /^no\.?$/.test(nl)) return acc;
     const obj = {
-      nama,
-      kelas:       getCell(cells, iKelas),
-      nis:         getCell(cells, iNIS),
-      kelengkapan: getCell(cells, iKelengkapan),
-      materi:      []
+      nama, kelas:getCell(cells,iKelas), nis:getCell(cells,iNIS),
+      kelengkapan:getCell(cells,iKelengkapan), materi:[]
     };
-
     nums.forEach(n => {
-      const grp    = materiMap[n];
-      const nilai  = grp.nilaiIdx  >= 0 ? getCell(cells, grp.nilaiIdx)  : '';
-      const status = grp.statusIdx >= 0 ? getCell(cells, grp.statusIdx) : '';
-      if (nilai !== '' || status !== '') {
-        obj.materi.push({
-          key:    `materi ${n}`,
-          nama:   grp.namaMateri || `Materi ${n}`,
-          nilai:  nilai || '-',
-          status: status
-        });
+      const grp   = materiMap[n];
+      const nilai  = grp.nilaiIdx>=0  ? getCell(cells,grp.nilaiIdx)  : '';
+      const status = grp.statusIdx>=0 ? getCell(cells,grp.statusIdx) : '';
+      if (nilai!==''||status!=='') {
+        obj.materi.push({ key:`materi ${n}`, nama:grp.namaMateri||`Materi ${n}`, nilai:nilai||'-', status });
       }
     });
-
-    results.push(obj);
-  });
-
-  return results;
+    acc.push(obj);
+    return acc;
+  }, []);
 }
 
 // ── Fetch sheet via GViz JSONP ─────────────────────────────────────────────────
 function fetchSheet(tabName) {
   return new Promise((resolve, reject) => {
-    const cb   = '_gviz_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-    const tqx  = encodeURIComponent(`out:json;responseHandler:${cb}`);
-    const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=${tqx}&sheet=${encodeURIComponent(tabName)}`;
-    const scr  = document.createElement('script');
-    const timer= setTimeout(()=>{ cleanup(); reject(new Error('Timeout — cek koneksi/visibilitas sheet')); }, 15000);
-
-    function cleanup(){
-      clearTimeout(timer); delete window[cb];
-      if(scr.parentNode) scr.parentNode.removeChild(scr);
-    }
-
+    const cb  = '_gviz_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+    const tqx = encodeURIComponent(`out:json;responseHandler:${cb}`);
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=${tqx}&sheet=${encodeURIComponent(tabName)}`;
+    const scr = document.createElement('script');
+    const timer = setTimeout(()=>{ cleanup(); reject(new Error('Timeout')); }, 15000);
+    function cleanup(){ clearTimeout(timer); delete window[cb]; scr.parentNode?.removeChild(scr); }
     window[cb] = json => {
       cleanup();
-      if(!window._gvizRaw) window._gvizRaw={};
-      window._gvizRaw[tabName] = json;
-      try { resolve(parseGViz(json)); }
-      catch(e){ reject(new Error('Parse error: '+e.message)); }
+      if (!window._gvizRaw) window._gvizRaw={};
+      window._gvizRaw[tabName]=json;
+      try { resolve(parseGViz(json)); } catch(e){ reject(new Error('Parse error: '+e.message)); }
     };
-    scr.onerror = ()=>{ cleanup(); reject(new Error('Script load gagal — sheet belum publik?')); };
+    scr.onerror = ()=>{ cleanup(); reject(new Error('Script load gagal')); };
     scr.src = url;
     document.head.appendChild(scr);
   });
 }
 
-// ── Debug box ──────────────────────────────────────────────────────────────────
-function showDebug(cls, html){
+function showDebug(cls,html){
   let d=$('debugBox');
   if(!d){ d=document.createElement('div'); d.id='debugBox'; document.querySelector('.page').appendChild(d); }
   d.className='debug-box '+cls; d.innerHTML=html;
@@ -536,72 +524,47 @@ async function loadAll(){
   $('loading').style.display='block';
   $('result').classList.remove('show');
   $('emptyState').style.display='none';
-  setStatus('','Mengambil data…');
-  setConn('','Memuat…');
+  setStatus('','Mengambil data…'); setConn('','Memuat…');
   try {
     const [dIG,dIE,dMG,dME] = await Promise.all([
-      fetchSheet(SHEETS.inst.ganjil),
-      fetchSheet(SHEETS.inst.genap),
-      fetchSheet(SHEETS.manaj.ganjil),
-      fetchSheet(SHEETS.manaj.genap)
+      fetchSheet(SHEETS.inst.ganjil), fetchSheet(SHEETS.inst.genap),
+      fetchSheet(SHEETS.manaj.ganjil), fetchSheet(SHEETS.manaj.genap)
     ]);
     data.inst.ganjil=dIG; data.inst.genap=dIE;
     data.manaj.ganjil=dMG; data.manaj.genap=dME;
     const total=dIG.length+dIE.length+dMG.length+dME.length;
-
-    const sheetResults = [
-      { label:'Injar Ganjil',  key:SHEETS.inst.ganjil,   count:dIG.length },
-      { label:'Injar Genap',   key:SHEETS.inst.genap,    count:dIE.length },
-      { label:'Manjar Ganjil', key:SHEETS.manaj.ganjil,  count:dMG.length },
-      { label:'Manjar Genap',  key:SHEETS.manaj.genap,   count:dME.length },
+    const sheetResults=[
+      {label:'Injar Ganjil', key:SHEETS.inst.ganjil,  count:dIG.length},
+      {label:'Injar Genap',  key:SHEETS.inst.genap,   count:dIE.length},
+      {label:'Manjar Ganjil',key:SHEETS.manaj.ganjil, count:dMG.length},
+      {label:'Manjar Genap', key:SHEETS.manaj.genap,  count:dME.length},
     ];
-    const emptySheets = sheetResults.filter(s=>s.count===0);
-
+    const emptySheets=sheetResults.filter(s=>s.count===0);
     if(total===0){
-      setStatus('err','Data kosong — lihat DEBUG INFO');
-      setConn('err','Gagal');
+      setStatus('err','Data kosong'); setConn('err','Gagal');
       const raw=window._gvizRaw?.[SHEETS.inst.ganjil];
-      const cols=(raw?.table?.cols||[]).map((c,i)=>`[${i}] ${normalizeLabel(c.label||'(kosong)')}`);
-      const rowCount=raw?.table?.rows?.length||0;
-      showDebug('warn',
-        `<b>⚠️ Semua sheet kosong.</b> Baris data sheet pertama: ${rowCount}<br>
-Kolom (${cols.length}): ${cols.slice(0,10).join(' | ')}<br>
-Raw[0..3]: ${JSON.stringify((raw?.table?.cols||[]).slice(0,4).map(c=>c.label))}`
-      );
+      const cols=(raw?.table?.cols||[]).map((c,i)=>`[${i}] ${normalizeLabel(c.label||'?')}`);
+      showDebug('warn',`<b>⚠️ Semua sheet kosong.</b><br>Kolom: ${cols.slice(0,8).join(' | ')}`);
     } else {
-      setStatus('ok',`Injar: ${dIG.length}+${dIE.length} siswa · Manjar: ${dMG.length}+${dME.length} siswa`);
+      setStatus('ok',`Injar: ${dIG.length}+${dIE.length} · Manjar: ${dMG.length}+${dME.length} siswa`);
       setConn('ok','Terhubung');
       $('searchInput').disabled=false;
-
       if(emptySheets.length>0){
-        const debugLines = emptySheets.map(s=>{
+        const lines=emptySheets.map(s=>{
           const raw=window._gvizRaw?.[s.key];
-          const rowCount=raw?.table?.rows?.length||0;
           const cols=(raw?.table?.cols||[]).slice(0,4).map(c=>normalizeLabel(c.label||'?'));
-          return `<b>${s.label}</b>: ${rowCount} baris, kolom awal: ${cols.join(' | ')}`;
+          return `<b>${s.label}</b>: ${raw?.table?.rows?.length||0} baris · ${cols.join(' | ')}`;
         });
-        showDebug('warn',
-          `<b>ℹ️ Beberapa sheet tidak terbaca:</b><br>${debugLines.join('<br>')}<br>
-<br>Kemungkinan: format header kolom berbeda dari sheet lain.<br>
-Pastikan pola kolom: <em>Materi &amp; Praktikum N [nama]</em> dan <em>Materi N Status</em>`
-        );
-      } else {
-        $('debugBox')?.remove();
-      }
+        showDebug('warn',`<b>ℹ️ Beberapa sheet kosong:</b><br>${lines.join('<br>')}`);
+      } else { $('debugBox')?.remove(); }
     }
     updateCounts();
   } catch(e){
     const msg=e?.message||String(e);
-    setStatus('err','Gagal: '+msg);
-    setConn('err','Error');
-    showDebug('err',
-      `<b>❌ Gagal mengambil data</b><br>Error: ${msg}<br>Sheet ID: ${SHEET_ID}<br>
-<a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Injar_Ganjil" target="_blank" style="color:#4F8EF7">→ Uji URL GViz di browser</a><br>
-Pastikan sheet di-share "Anyone with the link can view"`
-    );
-  } finally {
-    $('loading').style.display='none';
-  }
+    setStatus('err','Gagal: '+msg); setConn('err','Error');
+    showDebug('err',`<b>❌ Gagal mengambil data</b><br>${msg}<br>
+<a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Injar_Ganjil" target="_blank" style="color:#4F8EF7">→ Uji URL GViz</a>`);
+  } finally { $('loading').style.display='none'; }
 }
 
 function updateCounts(){
@@ -610,7 +573,7 @@ function updateCounts(){
   $('countGenap').textContent =data[m].genap.length >0?`${data[m].genap.length} siswa` :'Tidak ada data';
 }
 
-// ── Switch mapel / sem ─────────────────────────────────────────────────────────
+// ── Switch ─────────────────────────────────────────────────────────────────────
 function switchMapel(mapel){
   state.mapel=mapel;
   document.querySelectorAll('.mapel-tab').forEach(t=>t.classList.remove('active'));
@@ -624,8 +587,9 @@ function switchSem(sem){
   resetSearch();
 }
 function resetSearch(){
-  $('searchInput').value='';
-  $('dropdown').classList.remove('open');
+  searchEl.value='';
+  $('searchClear').classList.remove('show');
+  ddEl.classList.remove('open');
   $('result').classList.remove('show');
   $('emptyState').style.display='none';
   const d=data[state.mapel][state.sem];
@@ -641,22 +605,30 @@ searchEl.addEventListener('input',()=>{
   const q=searchEl.value.trim().toLowerCase();
   $('result').classList.remove('show');
   $('emptyState').style.display='none';
+  $('searchClear').classList.toggle('show', searchEl.value.length>0);
   if(q.length<2){ ddEl.classList.remove('open'); return; }
   const d=data[state.mapel][state.sem];
   state.filtered=d.filter(s=>s.nama.toLowerCase().includes(q)).slice(0,8);
   selIdx=-1;
   ddEl.innerHTML=state.filtered.length===0
-    ?`<div class="dd-empty">Tidak ada siswa "<strong>${searchEl.value}</strong>"</div>`
+    ?`<div class="dd-empty">Tidak ditemukan "<strong>${searchEl.value}</strong>"</div>`
     :state.filtered.map((s,i)=>`
       <div class="dd-item" onclick="pick(${i})">
         <div class="dd-ava" style="background:${avaBg(s.nama)}">${ini(s.nama)}</div>
-        <div>
-          <div class="dd-name">${hl(s.nama,q)}</div>
-          <div class="dd-meta">${s.kelas||'—'} ${s.nis?'· NIS '+s.nis:''}</div>
-        </div>
+        <div><div class="dd-name">${hl(s.nama,q)}</div>
+        <div class="dd-meta">${s.kelas||'—'}${s.nis?' · NIS '+s.nis:''}</div></div>
       </div>`).join('');
   ddEl.classList.add('open');
 });
+
+// FIX: dropdown tutup saat scroll di luar search area (mobile)
+let touchStartY=0;
+document.addEventListener('touchstart',e=>{ touchStartY=e.touches[0].clientY; },{passive:true});
+document.addEventListener('touchmove',e=>{
+  if(!ddEl.classList.contains('open')) return;
+  const dy=Math.abs(e.touches[0].clientY-touchStartY);
+  if(dy>10 && !ddEl.contains(e.target)) ddEl.classList.remove('open');
+},{passive:true});
 
 searchEl.addEventListener('keydown',e=>{
   const items=ddEl.querySelectorAll('.dd-item');
@@ -669,35 +641,80 @@ searchEl.addEventListener('keydown',e=>{
 function updActive(items){ items.forEach((el,i)=>el.classList.toggle('focus',i===selIdx)); }
 document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) ddEl.classList.remove('open'); });
 
+// Tombol clear
+$('searchClear').addEventListener('click',()=>{ resetSearch(); searchEl.focus(); });
+
 function pick(idx){
   const s=state.filtered[idx];
   ddEl.classList.remove('open');
   searchEl.value=s.nama;
+  $('searchClear').classList.add('show');
   renderResult(s);
 }
 
-// ── Render result ──────────────────────────────────────────────────────────────
-function renderResult(s){
-  const total   = s.materi.length;
-
-  // Hitung kategori per materi berdasarkan nilai
-  let cBawah=0, cStandar=0, cAtas=0;
-  s.materi.forEach(m => {
-    const k = getKategori(m.nilai);
-    if(k==='atas')    cAtas++;
-    else if(k==='standar') cStandar++;
-    else              cBawah++;
+// ── Ringkasan kelas untuk mapel+sem aktif ─────────────────────────────────────
+function buildKelasStats(siswaList) {
+  let total=0, cAtas=0, cStandar=0, cBawah=0;
+  siswaList.forEach(s => {
+    s.materi.forEach(m => {
+      const k=getKategori(m.nilai);
+      if(k==='kosong') return;
+      total++;
+      if(k==='atas') cAtas++;
+      else if(k==='standar') cStandar++;
+      else cBawah++;
+    });
   });
+  if(total===0) return null;
+  return { total, cAtas, cStandar, cBawah,
+    pAtas:   Math.round(cAtas/total*100),
+    pStandar:Math.round(cStandar/total*100),
+    pBawah:  Math.round(cBawah/total*100) };
+}
 
-  // Progress bar: persentase tiap segmen dari total materi
-  const pBawah   = total>0 ? Math.round(cBawah/total*100)   : 0;
-  const pStandar = total>0 ? Math.round(cStandar/total*100) : 0;
-  const pAtas    = total>0 ? Math.round(cAtas/total*100)    : 0;
+// ── Render ─────────────────────────────────────────────────────────────────────
+function renderResult(s){
+  let cBawah=0, cStandar=0, cAtas=0, cKosong=0;
+  s.materi.forEach(m => {
+    const k=getKategori(m.nilai);
+    if(k==='atas') cAtas++;
+    else if(k==='standar') cStandar++;
+    else if(k==='bawah') cBawah++;
+    else cKosong++;
+  });
+  const total=s.materi.length;
+  const totalNilai=cAtas+cStandar+cBawah;
+  const {pB,pS,pA}=calcSegments(cBawah,cStandar,cAtas,totalNilai);
 
   const isLengkap  = /lengkap/i.test(s.kelengkapan)&&!/tidak/i.test(s.kelengkapan);
   const semLabel   = state.sem==='ganjil'?'Semester Ganjil':'Semester Genap';
   const mapelLabel = state.mapel==='inst'?'Instalasi Jaringan':'Manajemen Jaringan';
   const mapelCls   = state.mapel;
+
+  // Ringkasan kelas
+  const kelasList=data[state.mapel][state.sem];
+  const ks=buildKelasStats(kelasList);
+  const kelasStatHtml = ks ? `
+    <div class="kelas-summary">
+      <div class="kelas-summary-title">📊 Ringkasan Kelas (${kelasList.length} Siswa)</div>
+      <div class="kelas-bars">
+        <div class="kelas-bar-row">
+          <div class="kelas-bar-label">Atas Komp.</div>
+          <div class="kelas-bar-track"><div class="kelas-bar-fill atas" style="width:0%" data-w="${ks.pAtas}"></div></div>
+          <div class="kelas-bar-pct">${ks.pAtas}%</div>
+        </div>
+        <div class="kelas-bar-row">
+          <div class="kelas-bar-label">Standar</div>
+          <div class="kelas-bar-track"><div class="kelas-bar-fill standar" style="width:0%" data-w="${ks.pStandar}"></div></div>
+          <div class="kelas-bar-pct">${ks.pStandar}%</div>
+        </div>
+        <div class="kelas-bar-row">
+          <div class="kelas-bar-label">Bawah Komp.</div>
+          <div class="kelas-bar-track"><div class="kelas-bar-fill bawah" style="width:0%" data-w="${ks.pBawah}"></div></div>
+          <div class="kelas-bar-pct">${ks.pBawah}%</div>
+        </div>
+      </div>
+    </div>` : '';
 
   $('result').innerHTML=`
     <div class="prof-strip">
@@ -715,28 +732,16 @@ function renderResult(s){
     </div>
 
     <div class="stat-row">
-      <div class="stat-box">
-        <div class="stat-num c-blue">${total}</div>
-        <div class="stat-lbl">Total Materi</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num c-red">${cBawah}</div>
-        <div class="stat-lbl">Bawah<br>Kompetensi</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num c-standar">${cStandar}</div>
-        <div class="stat-lbl">Standar</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num c-atas">${cAtas}</div>
-        <div class="stat-lbl">Atas<br>Kompetensi</div>
-      </div>
+      <div class="stat-box"><div class="stat-num c-blue">${total}</div><div class="stat-lbl">Total Materi</div></div>
+      <div class="stat-box"><div class="stat-num c-red">${cBawah}</div><div class="stat-lbl">Bawah<br>Kompetensi</div></div>
+      <div class="stat-box"><div class="stat-num c-standar">${cStandar}</div><div class="stat-lbl">Standar</div></div>
+      <div class="stat-box"><div class="stat-num c-atas">${cAtas}</div><div class="stat-lbl">Atas<br>Kompetensi</div></div>
     </div>
 
     <div class="prog-strip">
       <div class="prog-head">
         <span class="prog-label">Distribusi Kompetensi</span>
-        <span class="prog-pct">${cAtas} Atas · ${cStandar} Standar · ${cBawah} Bawah</span>
+        <span class="prog-pct">🟢 ${cAtas} Atas &nbsp;🔵 ${cStandar} Standar &nbsp;🔴 ${cBawah} Bawah</span>
       </div>
       <div class="prog-track">
         <div class="prog-seg bawah"   id="pBawah"   style="width:0%"></div>
@@ -745,13 +750,15 @@ function renderResult(s){
       </div>
     </div>
 
+    ${kelasStatHtml}
+
     <div class="materi-wrap">
       <div class="mat-section-title">Detail Setiap Materi</div>
       <div class="materi-grid">
         ${total===0
           ?`<p style="color:var(--txt3);font-size:13px;grid-column:1/-1">Tidak ada data materi.</p>`
           :s.materi.map((m,i)=>{
-              const kat = getKategori(m.nilai);
+              const kat=getKategori(m.nilai);
               return `<div class="mat-card ${kat}" style="animation-delay:${i*.03}s">
                 <div class="mat-idx">${String(i+1).padStart(2,'0')}</div>
                 <div class="mat-info">
@@ -763,21 +770,29 @@ function renderResult(s){
             }).join('')
         }
       </div>
-    </div>`;
+    </div>
+
+    <button class="reset-btn" onclick="resetSearch();searchEl.focus()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      Cari Siswa Lain
+    </button>`;
 
   $('result').classList.add('show');
-  $('result').scrollIntoView({behavior:'smooth',block:'nearest'});
+  $('result').scrollIntoView({behavior:'smooth', block:'nearest'});
 
-  // Animasi progress bar
+  // Animasi progress bar siswa
   setTimeout(()=>{
-    const b=$('pBawah'); const st=$('pStandar'); const a=$('pAtas');
-    if(b)  b.style.width  = pBawah+'%';
-    if(st) st.style.width = pStandar+'%';
-    if(a)  a.style.width  = pAtas+'%';
-  }, 80);
+    const b=$('pBawah'), st=$('pStandar'), a=$('pAtas');
+    if(b)  b.style.width  = pB+'%';
+    if(st) st.style.width = pS+'%';
+    if(a)  a.style.width  = pA+'%';
+    // Animasi bar kelas
+    document.querySelectorAll('.kelas-bar-fill').forEach(el=>{
+      el.style.width = (el.dataset.w||0)+'%';
+    });
+  }, 100);
 }
 
-// ── Init ───────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', loadAll);
 </script>
 </body>
