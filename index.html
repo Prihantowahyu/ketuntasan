@@ -300,7 +300,18 @@ function setStatus(type, msg) {
 
 // ── Parse GViz ─────────────────────────────────────────────────────────────────
 function parseGViz(json) {
-  const cols = json.table.cols.map(c => (c.label||'').trim());
+  // Normalisasi label kolom: kadang GViz menggabungkan judul+header
+  // mis: "LAPORAN KETUNTASAN ... Nama Siswa" -> ambil bagian terakhir yang bermakna
+  const cols = json.table.cols.map(c => {
+    let label = (c.label||'').trim();
+    // Kalau label panjang & mengandung "Nama Siswa" di dalamnya, ambil dari "Nama Siswa" dst
+    const knownHeaders = ['Nama Siswa','Kelas','No. Induk','Materi '];
+    for (const kh of knownHeaders) {
+      const idx = label.indexOf(kh);
+      if (idx > 0) { label = label.substring(idx); break; }
+    }
+    return label;
+  });
   const rows = json.table.rows || [];
   const results = [];
 
@@ -386,7 +397,7 @@ async function fetchSheet(tabName) {
     const cbName = '_gviz_' + Date.now() + '_' + Math.random().toString(36).slice(2);
     // Format tqx: "out:json;responseHandler:CALLBACK"
     const tqx = encodeURIComponent(`out:json;responseHandler:${cbName}`);
-    const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=${tqx}&sheet=${tab}&headers=2`;
+    const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=${tqx}&sheet=${tab}`;
 
     const script = document.createElement('script');
     const timer = setTimeout(() => {
