@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Laporan Ketuntasan — Injar + Manjar</title>
+<title>Laporan Ketuntasan Mapel Injar & Manjar — SEMKADIP</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -200,7 +200,7 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
   <div class="topbar">
     <div class="logo-mark">ET</div>
     <div class="topbar-info">
-      <div class="topbar-title">KETUNTASAN</div>
+      <div class="topbar-title">Instalasi Jaringan & Manajemen Jaringan</div>
       <div class="topbar-sub">SMK Diponegoro Tumpang</div>
     </div>
     <div class="conn-pill">
@@ -345,14 +345,36 @@ function parseGViz(json) {
 
 async function fetchSheet(tabName) {
   const tab = encodeURIComponent(tabName);
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${tab}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const txt = await res.text();
-  // Strip JSONP wrapper
-  const clean = txt.replace(/^[^(]*\(/, '').replace(/\);?\s*$/, '');
-  const json = JSON.parse(clean);
-  return parseGViz(json);
+  // Pakai JSONP agar tidak kena CORS block di GitHub Pages
+  return new Promise((resolve, reject) => {
+    const cbName = '_gviz_' + Math.random().toString(36).slice(2);
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json%3BresponseHandler:${cbName}&sheet=${tab}`;
+
+    const script = document.createElement('script');
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error('Timeout - Sheets lambat merespons'));
+    }, 15000);
+
+    function cleanup() {
+      clearTimeout(timer);
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    window[cbName] = function(json) {
+      cleanup();
+      try { resolve(parseGViz(json)); }
+      catch(e) { reject(e); }
+    };
+
+    script.onerror = () => {
+      cleanup();
+      reject(new Error('Gagal load - Pastikan Sheets sudah dibagikan ke publik'));
+    };
+    script.src = url;
+    document.head.appendChild(script);
+  });
 }
 
 // ── Load all ───────────────────────────────────────────────────────────────────
