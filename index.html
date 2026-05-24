@@ -391,6 +391,39 @@ mark { background:rgba(79,142,247,0.25); color:var(--blue); border-radius:3px; p
 // ── State ──────────────────────────────────────────────────────────────────────
 const state = { ganjil: [], genap: [], sem: 'ganjil', filtered: [] };
 
+// ── Config persistence ─────────────────────────────────────────────────────────
+const CFG_KEY = 'etatib_ketuntasan_cfg';
+
+function saveConfig() {
+  const cfg = {
+    url:      $('sheetUrl').value.trim(),
+    tabGanjil: $('tabGanjil').value.trim(),
+    tabGenap:  $('tabGenap').value.trim()
+  };
+  localStorage.setItem(CFG_KEY, JSON.stringify(cfg));
+}
+
+function loadConfig() {
+  try {
+    const cfg = JSON.parse(localStorage.getItem(CFG_KEY) || '{}');
+    if (cfg.url)       $('sheetUrl').value   = cfg.url;
+    if (cfg.tabGanjil) $('tabGanjil').value  = cfg.tabGanjil;
+    if (cfg.tabGenap)  $('tabGenap').value   = cfg.tabGenap;
+    return !!cfg.url;
+  } catch { return false; }
+}
+
+// Auto-load saat halaman dibuka
+document.addEventListener('DOMContentLoaded', () => {
+  const hasCfg = loadConfig();
+  if (hasCfg) {
+    // Tutup config panel, langsung muat
+    const body = $('configBody');
+    body.classList.remove('open');
+    loadBoth();
+  }
+});
+
 // ── Utils ──────────────────────────────────────────────────────────────────────
 const $  = id => document.getElementById(id);
 const hl = (t,q) => t.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark>$1</mark>');
@@ -490,6 +523,7 @@ async function loadBoth() {
   const tabE = $('tabGenap').value.trim()  || 'Genap';
 
   if (!id) { setStatus('err','Masukkan ID atau URL Google Sheets terlebih dahulu.'); return; }
+  saveConfig();
 
   $('loading').style.display = 'block';
   $('result').classList.remove('show');
