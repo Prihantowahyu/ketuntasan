@@ -16,6 +16,11 @@
   --green:#34D399; --green-dim:rgba(52,211,153,0.1);
   --red:#F87171; --red-dim:rgba(248,113,113,0.1);
   --amber:#FBBF24; --amber-dim:rgba(251,191,36,0.12);
+
+  /* Kategori kompetensi */
+  --bawah-bg:#EF4444; --bawah-txt:#ffffff;
+  --standar-bg:#3B82F6; --standar-txt:#000000;
+  --atas-bg:#22C55E; --atas-txt:#000000;
 }
 html { scroll-behavior:smooth; }
 body { font-family:'DM Sans',sans-serif; background:var(--ink); color:var(--txt); min-height:100vh; overflow-x:hidden; }
@@ -48,6 +53,18 @@ body::after {
 .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(30px,7vw,52px); font-weight:800; line-height:1.08; letter-spacing:-1px; background:linear-gradient(135deg,#E8ECF4 0%,#6B7A99 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .hero h1 span { background:linear-gradient(135deg,var(--blue),var(--violet)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .hero-desc { margin-top:10px; font-size:14px; color:var(--txt2); line-height:1.6; max-width:420px; }
+
+/* Legend kompetensi */
+.legend-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .12s both; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600; }
+.legend-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+.legend-dot.bawah  { background:var(--bawah-bg); }
+.legend-dot.standar{ background:var(--standar-bg); }
+.legend-dot.atas   { background:var(--atas-bg); }
+.legend-item.bawah  { color:#F87171; }
+.legend-item.standar{ color:#60A5FA; }
+.legend-item.atas   { color:#4ADE80; }
+.legend-sep { color:var(--txt3); font-size:11px; align-self:center; }
 
 .mapel-tabs { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; animation:fadeSlideUp .7s cubic-bezier(.16,1,.3,1) .15s both; }
 .mapel-tab { padding:14px 16px; border-radius:14px; border:1px solid var(--edge); background:var(--ink2); cursor:pointer; transition:all .25s; position:relative; overflow:hidden; -webkit-tap-highlight-color:transparent; }
@@ -119,36 +136,59 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
 .kel-badge { position:relative; padding:7px 14px; border-radius:100px; font-size:11px; font-weight:700; letter-spacing:.5px; display:inline-flex; align-items:center; gap:5px; white-space:nowrap; }
 .kel-badge.ok { background:var(--green-dim); color:var(--green); border:1px solid rgba(52,211,153,.3); }
 .kel-badge.no { background:var(--red-dim);   color:var(--red);   border:1px solid rgba(248,113,113,.3); }
-.stat-row { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--edge); border-top:none; background:var(--ink2); overflow:hidden; }
-.stat-box { padding:16px 12px; text-align:center; border-right:1px solid var(--edge); }
+
+/* ── Stat row: sekarang 4 kolom (Total, Bawah, Standar, Atas) ── */
+.stat-row { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--edge); border-top:none; background:var(--ink2); overflow:hidden; }
+.stat-box { padding:14px 8px; text-align:center; border-right:1px solid var(--edge); }
 .stat-box:last-child { border-right:none; }
-.stat-num { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1; }
+.stat-num { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1; }
 .stat-num.c-blue  { color:var(--blue); }
-.stat-num.c-green { color:var(--green); }
-.stat-num.c-red   { color:var(--red); }
-.stat-lbl { font-size:9px; font-weight:600; color:var(--txt3); text-transform:uppercase; letter-spacing:1px; margin-top:5px; }
+.stat-num.c-red   { color:#F87171; }
+.stat-num.c-standar{ color:#60A5FA; }
+.stat-num.c-atas  { color:#4ADE80; }
+.stat-lbl { font-size:8px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:.8px; margin-top:5px; line-height:1.3; }
+
 .prog-strip { background:var(--ink2); border:1px solid var(--edge); border-top:none; padding:14px 20px; }
 .prog-head { display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px; }
 .prog-label { color:var(--txt2); font-weight:500; }
-.prog-pct { font-family:'DM Mono',monospace; font-weight:600; color:var(--green); }
-.prog-track { height:5px; background:var(--ink3); border-radius:100px; overflow:hidden; }
-.prog-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--green),var(--blue)); transition:width 1s cubic-bezier(.16,1,.3,1); }
+.prog-pct { font-family:'DM Mono',monospace; font-weight:600; color:var(--atas-bg); }
+
+/* Progress bar sekarang 3 segmen */
+.prog-track { height:7px; background:var(--ink3); border-radius:100px; overflow:hidden; display:flex; }
+.prog-seg { height:100%; transition:width 1s cubic-bezier(.16,1,.3,1); }
+.prog-seg.bawah   { background:var(--bawah-bg); }
+.prog-seg.standar { background:var(--standar-bg); }
+.prog-seg.atas    { background:var(--atas-bg); }
+
 .materi-wrap { background:var(--ink2); border:1px solid var(--edge); border-top:none; border-radius:0 0 16px 16px; padding:18px 16px; }
 .mat-section-title { font-size:10px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
 .materi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; }
+
+/* ── Kartu materi: 3 varian ── */
 .mat-card { border-radius:12px; padding:12px 14px; display:flex; align-items:center; gap:10px; border:1px solid; transition:transform .15s,box-shadow .15s; cursor:default; animation:matIn .3s ease both; }
 .mat-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.3); }
-.mat-card.t { background:var(--green-dim); border-color:rgba(52,211,153,.2); }
-.mat-card.b { background:var(--red-dim);   border-color:rgba(248,113,113,.2); }
+
+/* Bawah Kompetensi — merah */
+.mat-card.bawah  { background:rgba(239,68,68,0.12); border-color:rgba(239,68,68,0.25); }
+/* Standar — biru */
+.mat-card.standar{ background:rgba(59,130,246,0.12); border-color:rgba(59,130,246,0.25); }
+/* Atas Kompetensi — hijau */
+.mat-card.atas   { background:rgba(34,197,94,0.12);  border-color:rgba(34,197,94,0.25); }
+
 .mat-idx { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'DM Mono',monospace; font-size:10px; font-weight:600; }
-.t .mat-idx { background:rgba(52,211,153,.15); color:var(--green); }
-.b .mat-idx { background:rgba(248,113,113,.15); color:var(--red); }
+.bawah  .mat-idx { background:rgba(239,68,68,.2);  color:#F87171; }
+.standar .mat-idx{ background:rgba(59,130,246,.2); color:#93C5FD; }
+.atas   .mat-idx { background:rgba(34,197,94,.2);  color:#86EFAC; }
+
 .mat-info { flex:1; min-width:0; }
 .mat-name { font-size:12px; font-weight:500; color:var(--txt); white-space:normal; overflow:visible; margin-bottom:2px; line-height:1.4; }
 .mat-nilai { font-size:11px; font-family:'DM Mono',monospace; color:var(--txt3); }
+
+/* Chip — solid background sesuai kategori */
 .mat-chip { font-size:9px; font-weight:700; padding:3px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
-.t .mat-chip { background:rgba(52,211,153,.15); color:var(--green); }
-.b .mat-chip { background:rgba(248,113,113,.15); color:var(--red); }
+.bawah  .mat-chip { background:var(--bawah-bg);  color:var(--bawah-txt); }
+.standar .mat-chip{ background:var(--standar-bg); color:var(--standar-txt); }
+.atas   .mat-chip { background:var(--atas-bg);   color:var(--atas-txt); }
 
 .debug-box { margin-top:16px; padding:14px 16px; border-radius:12px; font-size:11px; line-height:1.8; word-break:break-all; }
 .debug-box.warn { background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.3); color:#FBBF24; }
@@ -178,9 +218,10 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
   .prof-strip { padding:16px; }
   .prof-ava { width:44px; height:44px; font-size:16px; }
   .prof-name { font-size:17px; }
-  .stat-num { font-size:24px; }
-  .stat-lbl { font-size:8px; }
+  .stat-num { font-size:20px; }
+  .stat-lbl { font-size:7px; }
   .hero h1 { letter-spacing:-.5px; }
+  .stat-row { grid-template-columns:repeat(4,1fr); }
 }
 @media(max-width:340px) { .materi-grid { grid-template-columns:1fr; } }
 </style>
@@ -204,6 +245,15 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
   <div class="hero">
     <h1>Laporan<br><span>Ketuntasan</span><br>Siswa</h1>
     <p class="hero-desc">Pilih mata pelajaran & semester, lalu cari nama siswa untuk melihat ketuntasan materi.</p>
+  </div>
+
+  <!-- Legend kategori kompetensi -->
+  <div class="legend-row">
+    <div class="legend-item bawah"><div class="legend-dot bawah"></div>Bawah Kompetensi (&lt;80)</div>
+    <span class="legend-sep">·</span>
+    <div class="legend-item standar"><div class="legend-dot standar"></div>Standar (80–89)</div>
+    <span class="legend-sep">·</span>
+    <div class="legend-item atas"><div class="legend-dot atas"></div>Atas Kompetensi (≥90)</div>
   </div>
 
   <div class="mapel-tabs">
@@ -263,6 +313,23 @@ const SHEETS = {
   manaj: { ganjil: 'Manjar_Ganjil', genap: 'Manjar_Genap' }
 };
 
+// ── Kategori kompetensi berdasarkan nilai ──────────────────────────────────────
+// < 80   → Bawah Kompetensi  (merah, teks putih)
+// 80–89  → Standar           (biru, teks hitam)
+// ≥ 90   → Atas Kompetensi  (hijau, teks hitam)
+function getKategori(nilaiStr) {
+  const n = parseFloat(String(nilaiStr).replace(',','.'));
+  if (isNaN(n)) return 'bawah';   // nilai tidak terbaca → anggap belum
+  if (n >= 90)  return 'atas';
+  if (n >= 80)  return 'standar';
+  return 'bawah';
+}
+const LABEL_MAP = {
+  bawah:   'Bawah Kompetensi',
+  standar: 'Standar',
+  atas:    'Atas Kompetensi'
+};
+
 // ── State ──────────────────────────────────────────────────────────────────────
 const data  = { inst:{ganjil:[],genap:[]}, manaj:{ganjil:[],genap:[]} };
 const state = { mapel:'inst', sem:'ganjil', filtered:[] };
@@ -285,23 +352,13 @@ function setStatus(type,msg){
 }
 
 // ── Normalisasi label kolom GViz ───────────────────────────────────────────────
-// GViz menggabungkan teks dari merged-cell judul laporan dengan header kolom.
-// Contoh nyata dari sheet ini:
-//   "LAPORAN KETUNTASAN SISWA — INSTALASI JARINGAN | SEMESTER GANJIL Nama Siswa"
-//   "Materi & Praktikum 1 Pengertian dan Fungsi Jaringan Komputer"
-//   "Materi 1 Status"
-//
-// Strategi: cari posisi kata kunci yang dikenal, potong dari situ.
 function normalizeLabel(raw) {
   if (!raw) return '';
   const s = raw.trim();
-
-  // Daftar pola yang menjadi "awal bermakna" dari label kolom
-  // Urutan PENTING — lebih spesifik dulu
   const anchors = [
-    /Materi\s*&\s*Praktikum\s+\d+/i,   // "Materi & Praktikum N ..."
-    /Materi\s+\d+\s+Status/i,           // "Materi N Status"
-    /Materi\s+\d+/i,                    // "Materi N ..."
+    /Materi\s*&\s*Praktikum\s+\d+/i,
+    /Materi\s+\d+\s+Status/i,
+    /Materi\s+\d+/i,
     /Status\s+Kelengkapan/i,
     /Kelengkapan/i,
     /No\.?\s*Induk/i,
@@ -309,72 +366,41 @@ function normalizeLabel(raw) {
     /Nama\s+Siswa/i,
     /Kelas/i,
   ];
-
   for (const pattern of anchors) {
     const m = s.search(pattern);
-    if (m > 0) return s.substring(m).trim();   // potong prefix junk
-    if (m === 0) return s;                      // sudah bersih
+    if (m > 0) return s.substring(m).trim();
+    if (m === 0) return s;
   }
-  return s; // kembalikan apa adanya
+  return s;
 }
 
-// ── parseGViz — robust untuk struktur sheet aktual ────────────────────────────
-//
-// Struktur kolom yang SUDAH DIKONFIRMASI dari debug:
-//   [0]  "...Nama Siswa"          → nama siswa
-//   [1]  "Kelas"                  → kelas
-//   [2]  "No. Induk"              → NIS
-//   [3]  "Materi & Praktikum 1 <Nama Panjang Materi>"  → NILAI materi 1
-//   [4]  "Materi 1 Status"        → STATUS materi 1
-//   [5]  "Materi & Praktikum 2 <Nama Panjang Materi>"  → NILAI materi 2
-//   [6]  "Materi 2 Status"        → STATUS materi 2
-//   ... dst.
-//   [N]  "Kelengkapan / Status Kelengkapan"
-//
-// Pola: kolom nilai  → label mengandung "Materi & Praktikum N" (atau "Materi N" saja)
-//                      dan BUKAN "Status"
-//       kolom status → label mengandung "Materi N Status"
-//
+// ── parseGViz ─────────────────────────────────────────────────────────────────
 function parseGViz(json) {
   const rawCols = json.table?.cols || [];
   const rows    = json.table?.rows || [];
 
-  // Normalisasi semua label
   const cols = rawCols.map((c,i) => ({
     i,
     raw: c.label || '',
     lbl: normalizeLabel(c.label || '')
   }));
 
-  // ── Identifikasi kolom tetap ─────────────────────────────────────────────
   let iNama = -1, iKelas = -1, iNIS = -1, iKelengkapan = -1;
 
   cols.forEach(c => {
     const l = c.lbl.toLowerCase();
-    // Nama Siswa — bisa ada setelah prefix panjang, sudah dinormalisasi
     if (iNama < 0 && /^nama\s+siswa$/.test(l)) { iNama = c.i; return; }
     if (iKelas < 0 && /^kelas$/.test(l))        { iKelas = c.i; return; }
     if (iNIS   < 0 && /^no\.?\s*induk$|^nisn?$/.test(l)) { iNIS = c.i; return; }
     if (iKelengkapan < 0 && /kelengkapan|status\s+kel/i.test(l)) { iKelengkapan = c.i; return; }
   });
 
-  // ── Identifikasi kolom materi ────────────────────────────────────────────
-  // Regex utama untuk kolom STATUS: "Materi N Status" (tanpa "& Praktikum")
   const reStatus = /^Materi\s+(\d+)\s+Status\b/i;
-
-  // Regex untuk kolom NILAI / nama materi panjang:
-  //   "Materi & Praktikum N <nama>"   → group(1)=N, group(2)=nama
-  //   "Materi N <nama>"               → group(1)=N, group(2)=nama (mungkin kosong)
-  // PENTING: harus BUKAN "Materi N Status"
-  const reNilai = /^Materi(?:\s*&\s*Praktikum)?\s+(\d+)\s*(.*)?$/i;
-
-  // materiMap: { N: { nilaiIdx, statusIdx, namaMateri } }
+  const reNilai  = /^Materi(?:\s*&\s*Praktikum)?\s+(\d+)\s*(.*)?$/i;
   const materiMap = {};
 
   cols.forEach(c => {
     const lbl = c.lbl;
-
-    // Coba status dulu (lebih spesifik)
     const mSt = lbl.match(reStatus);
     if (mSt) {
       const n = parseInt(mSt[1]);
@@ -382,16 +408,11 @@ function parseGViz(json) {
       materiMap[n].statusIdx = c.i;
       return;
     }
-
-    // Coba kolom nilai/nama materi
     const mNilai = lbl.match(reNilai);
     if (mNilai) {
       const n    = parseInt(mNilai[1]);
-      // Nama materi = sisa setelah "Materi [& Praktikum] N "
-      // Bersihkan: buang kata "Nilai" di akhir kalau ada
       let nama = (mNilai[2] || '').trim().replace(/\s*nilai\s*$/i,'').trim();
       if (!nama) nama = `Materi ${n}`;
-
       if (!materiMap[n]) materiMap[n] = { nilaiIdx:-1, statusIdx:-1, namaMateri:'' };
       materiMap[n].nilaiIdx   = c.i;
       materiMap[n].namaMateri = nama;
@@ -400,7 +421,6 @@ function parseGViz(json) {
 
   const nums = Object.keys(materiMap).map(Number).sort((a,b)=>a-b);
 
-  // ── Parse baris data ─────────────────────────────────────────────────────
   const getCell = (cells, idx) => {
     if (idx < 0 || idx >= cells.length) return '';
     const v = cells[idx]?.v;
@@ -413,8 +433,6 @@ function parseGViz(json) {
   rows.forEach(row => {
     const cells = row.c || [];
     const nama  = getCell(cells, iNama);
-
-    // Buang baris kosong / header / judul
     const nl = nama.toLowerCase();
     if (!nama || /^nama(\s+siswa)?$/.test(nl) || /^no\.?$/.test(nl)) return;
 
@@ -430,7 +448,6 @@ function parseGViz(json) {
       const grp    = materiMap[n];
       const nilai  = grp.nilaiIdx  >= 0 ? getCell(cells, grp.nilaiIdx)  : '';
       const status = grp.statusIdx >= 0 ? getCell(cells, grp.statusIdx) : '';
-      // Sertakan materi walau nilai kosong asal statusnya ada (atau sebaliknya)
       if (nilai !== '' || status !== '') {
         obj.materi.push({
           key:    `materi ${n}`,
@@ -499,7 +516,6 @@ async function loadAll(){
     data.manaj.ganjil=dMG; data.manaj.genap=dME;
     const total=dIG.length+dIE.length+dMG.length+dME.length;
 
-    // Cek sheet mana yang kosong dan buat ringkasan debug
     const sheetResults = [
       { label:'Injar Ganjil',  key:SHEETS.inst.ganjil,   count:dIG.length },
       { label:'Injar Genap',   key:SHEETS.inst.genap,    count:dIE.length },
@@ -524,7 +540,6 @@ Raw[0..3]: ${JSON.stringify((raw?.table?.cols||[]).slice(0,4).map(c=>c.label))}`
       setConn('ok','Terhubung');
       $('searchInput').disabled=false;
 
-      // Kalau ada sheet yang 0 siswa (tapi sheet lain ok), tampilkan info ringan
       if(emptySheets.length>0){
         const debugLines = emptySheets.map(s=>{
           const raw=window._gvizRaw?.[s.key];
@@ -630,11 +645,23 @@ function pick(idx){
 
 // ── Render result ──────────────────────────────────────────────────────────────
 function renderResult(s){
-  const total  = s.materi.length;
-  const tuntas = s.materi.filter(m=>/tuntas/i.test(m.status)&&!/belum/i.test(m.status)).length;
-  const belum  = total-tuntas;
-  const pct    = total>0?Math.round(tuntas/total*100):0;
-  const isLengkap = /lengkap/i.test(s.kelengkapan)&&!/tidak/i.test(s.kelengkapan);
+  const total   = s.materi.length;
+
+  // Hitung kategori per materi berdasarkan nilai
+  let cBawah=0, cStandar=0, cAtas=0;
+  s.materi.forEach(m => {
+    const k = getKategori(m.nilai);
+    if(k==='atas')    cAtas++;
+    else if(k==='standar') cStandar++;
+    else              cBawah++;
+  });
+
+  // Progress bar: persentase tiap segmen dari total materi
+  const pBawah   = total>0 ? Math.round(cBawah/total*100)   : 0;
+  const pStandar = total>0 ? Math.round(cStandar/total*100) : 0;
+  const pAtas    = total>0 ? Math.round(cAtas/total*100)    : 0;
+
+  const isLengkap  = /lengkap/i.test(s.kelengkapan)&&!/tidak/i.test(s.kelengkapan);
   const semLabel   = state.sem==='ganjil'?'Semester Ganjil':'Semester Genap';
   const mapelLabel = state.mapel==='inst'?'Instalasi Jaringan':'Manajemen Jaringan';
   const mapelCls   = state.mapel;
@@ -653,29 +680,52 @@ function renderResult(s){
       </div>
       <div class="kel-badge ${isLengkap?'ok':'no'}">${isLengkap?'✓ Lengkap':'✗ Tidak Lengkap'}</div>
     </div>
+
     <div class="stat-row">
-      <div class="stat-box"><div class="stat-num c-blue">${total}</div><div class="stat-lbl">Total Materi</div></div>
-      <div class="stat-box"><div class="stat-num c-green">${tuntas}</div><div class="stat-lbl">Tuntas</div></div>
-      <div class="stat-box"><div class="stat-num c-red">${belum}</div><div class="stat-lbl">Belum Tuntas</div></div>
+      <div class="stat-box">
+        <div class="stat-num c-blue">${total}</div>
+        <div class="stat-lbl">Total Materi</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num c-red">${cBawah}</div>
+        <div class="stat-lbl">Bawah<br>Kompetensi</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num c-standar">${cStandar}</div>
+        <div class="stat-lbl">Standar</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num c-atas">${cAtas}</div>
+        <div class="stat-lbl">Atas<br>Kompetensi</div>
+      </div>
     </div>
+
     <div class="prog-strip">
-      <div class="prog-head"><span class="prog-label">Progress Ketuntasan</span><span class="prog-pct">${pct}%</span></div>
-      <div class="prog-track"><div class="prog-fill" id="pFill" style="width:0%"></div></div>
+      <div class="prog-head">
+        <span class="prog-label">Distribusi Kompetensi</span>
+        <span class="prog-pct">${cAtas} Atas · ${cStandar} Standar · ${cBawah} Bawah</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-seg bawah"   id="pBawah"   style="width:0%"></div>
+        <div class="prog-seg standar" id="pStandar"  style="width:0%"></div>
+        <div class="prog-seg atas"    id="pAtas"     style="width:0%"></div>
+      </div>
     </div>
+
     <div class="materi-wrap">
       <div class="mat-section-title">Detail Setiap Materi</div>
       <div class="materi-grid">
         ${total===0
           ?`<p style="color:var(--txt3);font-size:13px;grid-column:1/-1">Tidak ada data materi.</p>`
           :s.materi.map((m,i)=>{
-              const ok=/tuntas/i.test(m.status)&&!/belum/i.test(m.status);
-              return `<div class="mat-card ${ok?'t':'b'}" style="animation-delay:${i*.03}s">
+              const kat = getKategori(m.nilai);
+              return `<div class="mat-card ${kat}" style="animation-delay:${i*.03}s">
                 <div class="mat-idx">${String(i+1).padStart(2,'0')}</div>
                 <div class="mat-info">
                   <div class="mat-name">${m.nama}</div>
                   <div class="mat-nilai">Nilai: <strong>${m.nilai}</strong></div>
                 </div>
-                <div class="mat-chip">${m.status||'Belum'}</div>
+                <div class="mat-chip">${LABEL_MAP[kat]}</div>
               </div>`;
             }).join('')
         }
@@ -684,7 +734,14 @@ function renderResult(s){
 
   $('result').classList.add('show');
   $('result').scrollIntoView({behavior:'smooth',block:'nearest'});
-  setTimeout(()=>{ const f=$('pFill'); if(f) f.style.width=pct+'%'; },80);
+
+  // Animasi progress bar
+  setTimeout(()=>{
+    const b=$('pBawah'); const st=$('pStandar'); const a=$('pAtas');
+    if(b)  b.style.width  = pBawah+'%';
+    if(st) st.style.width = pStandar+'%';
+    if(a)  a.style.width  = pAtas+'%';
+  }, 80);
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────────
