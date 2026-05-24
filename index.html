@@ -446,8 +446,20 @@ async function loadAll() {
     updateCounts();
   } catch(e) {
     console.error(e);
-    setStatus('err', 'Gagal memuat. Pastikan Sheets sudah dibagikan sebagai "Siapa saja yang punya link".');
+    const msg = e?.message || String(e);
+    setStatus('err', 'Gagal: ' + msg);
     setConn('err', 'Error');
+    let dbg = $('debugBox');
+    if (!dbg) {
+      dbg = document.createElement('div');
+      dbg.id = 'debugBox';
+      dbg.style.cssText = 'margin-top:16px;padding:14px 16px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.3);border-radius:12px;font-family:monospace;font-size:11px;color:#F87171;line-height:1.7;word-break:break-all;';
+      document.querySelector('.page').appendChild(dbg);
+    }
+    dbg.innerHTML = '<b>DEBUG INFO:</b><br>' +
+      'Sheet ID: ' + SHEET_ID + '<br>' +
+      'Error: ' + msg + '<br>' +
+      '<a href="https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=Injar_Ganjil" target="_blank" style="color:#4F8EF7">→ Test URL di browser (klik ini)</a>';
   } finally {
     $('loading').style.display = 'none';
   }
