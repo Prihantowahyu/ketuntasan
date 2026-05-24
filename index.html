@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Laporan Ketuntasan — Instalasi Jaringan dan Manajemen Jaringan</title>
+<title>Laporan Ketuntasan — INJAR & MANJAR</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -190,9 +190,9 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
 <div class="page">
 
   <div class="topbar">
-    <div class="logo-mark">ET</div>
+    <div class="logo-mark">PW</div>
     <div class="topbar-info">
-      <div class="topbar-title">Laporan Ketuntasan Injar & Manjar</div>
+      <div class="topbar-title">INJAR & MANJAR</div>
       <div class="topbar-sub">SMK Diponegoro Tumpang</div>
     </div>
     <div class="conn-pill">
@@ -209,13 +209,13 @@ mark { background:rgba(79,142,247,.25); color:var(--blue); border-radius:3px; pa
   <div class="mapel-tabs">
     <div class="mapel-tab inst active" onclick="switchMapel('inst')">
       <span class="mapel-badge">AKTIF</span>
-      <span class="mapel-emoji">🔌</span>
+      <span class="mapel-emoji">💻</span>
       <div class="mapel-name">Instalasi Jaringan</div>
       <div class="mapel-kelas">X TKJ</div>
     </div>
     <div class="mapel-tab manaj" onclick="switchMapel('manaj')">
       <span class="mapel-badge">AKTIF</span>
-      <span class="mapel-emoji">🖧</span>
+      <span class="mapel-emoji">🌐</span>
       <div class="mapel-name">Manajemen Jaringan</div>
       <div class="mapel-kelas">XI TKJ</div>
     </div>
@@ -499,26 +499,47 @@ async function loadAll(){
     data.manaj.ganjil=dMG; data.manaj.genap=dME;
     const total=dIG.length+dIE.length+dMG.length+dME.length;
 
+    // Cek sheet mana yang kosong dan buat ringkasan debug
+    const sheetResults = [
+      { label:'Injar Ganjil',  key:SHEETS.inst.ganjil,   count:dIG.length },
+      { label:'Injar Genap',   key:SHEETS.inst.genap,    count:dIE.length },
+      { label:'Manjar Ganjil', key:SHEETS.manaj.ganjil,  count:dMG.length },
+      { label:'Manjar Genap',  key:SHEETS.manaj.genap,   count:dME.length },
+    ];
+    const emptySheets = sheetResults.filter(s=>s.count===0);
+
     if(total===0){
       setStatus('err','Data kosong — lihat DEBUG INFO');
       setConn('err','Gagal');
-      // Tampilkan debug kolom dari sheet pertama
       const raw=window._gvizRaw?.[SHEETS.inst.ganjil];
       const cols=(raw?.table?.cols||[]).map((c,i)=>`[${i}] ${normalizeLabel(c.label||'(kosong)')}`);
       const rowCount=raw?.table?.rows?.length||0;
       showDebug('warn',
-        `<b>⚠️ Parser tidak menemukan siswa.</b><br>
-Sheet berhasil diakses. Baris data: ${rowCount}. Kolom terdeteksi (${cols.length}):<br>
-${cols.slice(0,12).join('<br>')}<br>
-${cols.length>12?`…(+${cols.length-12} lagi)<br>`:''}
-<br>Kolom nama siswa: ${$('searchInput')&&iNama>=0?'['+iNama+']':'TIDAK DITEMUKAN'}<br>
-<br><b>Kolom raw[0..5]:</b> ${JSON.stringify((raw?.table?.cols||[]).slice(0,6).map(c=>c.label))}`
+        `<b>⚠️ Semua sheet kosong.</b> Baris data sheet pertama: ${rowCount}<br>
+Kolom (${cols.length}): ${cols.slice(0,10).join(' | ')}<br>
+Raw[0..3]: ${JSON.stringify((raw?.table?.cols||[]).slice(0,4).map(c=>c.label))}`
       );
     } else {
       setStatus('ok',`Injar: ${dIG.length}+${dIE.length} siswa · Manjar: ${dMG.length}+${dME.length} siswa`);
       setConn('ok','Terhubung');
       $('searchInput').disabled=false;
-      $('debugBox')?.remove();
+
+      // Kalau ada sheet yang 0 siswa (tapi sheet lain ok), tampilkan info ringan
+      if(emptySheets.length>0){
+        const debugLines = emptySheets.map(s=>{
+          const raw=window._gvizRaw?.[s.key];
+          const rowCount=raw?.table?.rows?.length||0;
+          const cols=(raw?.table?.cols||[]).slice(0,4).map(c=>normalizeLabel(c.label||'?'));
+          return `<b>${s.label}</b>: ${rowCount} baris, kolom awal: ${cols.join(' | ')}`;
+        });
+        showDebug('warn',
+          `<b>ℹ️ Beberapa sheet tidak terbaca:</b><br>${debugLines.join('<br>')}<br>
+<br>Kemungkinan: format header kolom berbeda dari sheet lain.<br>
+Pastikan pola kolom: <em>Materi &amp; Praktikum N [nama]</em> dan <em>Materi N Status</em>`
+        );
+      } else {
+        $('debugBox')?.remove();
+      }
     }
     updateCounts();
   } catch(e){
