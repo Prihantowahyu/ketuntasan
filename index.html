@@ -386,7 +386,7 @@ async function fetchSheet(tabName) {
     const cbName = '_gviz_' + Date.now() + '_' + Math.random().toString(36).slice(2);
     // Format tqx: "out:json;responseHandler:CALLBACK"
     const tqx = encodeURIComponent(`out:json;responseHandler:${cbName}`);
-    const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=${tqx}&sheet=${tab}`;
+    const url  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=${tqx}&sheet=${tab}&headers=2`;
 
     const script = document.createElement('script');
     const timer = setTimeout(() => {
@@ -402,7 +402,13 @@ async function fetchSheet(tabName) {
 
     window[cbName] = function(json) {
       cleanup();
-      try { resolve(parseGViz(json)); }
+      try {
+        // Debug: simpan raw response untuk ditampilkan
+        window._lastGVizRaw = json;
+        const parsed = parseGViz(json);
+        window._lastParsed = parsed;
+        resolve(parsed);
+      }
       catch(e) { reject(e); }
     };
 
@@ -436,8 +442,24 @@ async function loadAll() {
     const total = dIG.length + dIE.length + dMG.length + dME.length;
 
     if (total === 0) {
-      setStatus('err', 'Tidak ada data. Pastikan Sheets sudah publik & format kolom sesuai.');
+      setStatus('err', 'Tidak ada data — cek DEBUG INFO di bawah');
       setConn('err', 'Gagal');
+      // Tampilkan debug
+      let dbg = $('debugBox') || document.createElement('div');
+      dbg.id = 'debugBox';
+      dbg.style.cssText = 'margin-top:16px;padding:14px 16px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.3);border-radius:12px;font-size:11px;color:#FBBF24;line-height:1.8;word-break:break-all;';
+      document.querySelector('.page').appendChild(dbg);
+      const raw = window._lastGVizRaw;
+      const cols = raw?.table?.cols?.map(c=>c.label)||[];
+      const rowCount = raw?.table?.rows?.length||0;
+      const parsed = window._lastParsed||[];
+      dbg.innerHTML = '<b>DEBUG INFO — Bantu diagnosa:</b><br>' +
+        'Sheet diakses: OK (GViz berhasil dipanggil)<br>' +
+        'Jumlah kolom: ' + cols.length + '<br>' +
+        'Jumlah baris raw: ' + rowCount + '<br>' +
+        'Siswa ter-parse: ' + parsed.length + '<br>' +
+        'Kolom pertama: ' + JSON.stringify(cols.slice(0,5)) + '<br>' +
+        '<br><b>Screenshot info di atas dan kirim ke Claude</b>';
     } else {
       setStatus('ok', `Injar: ${dIG.length}+${dIE.length} siswa | Manjar: ${dMG.length}+${dME.length} siswa`);
       setConn('ok', 'Terhubung');
