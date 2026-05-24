@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Ketuntasan — E-TATIB</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:       #0A0E1A;
+  --ink2:      #141828;
+  --ink3:      #1E2438;
+  --edge:      rgba(255,255,255,0.07);
+  --edge2:     rgba(255,255,255,0.12);
+  --txt:       #E8ECF4;
+  --txt2:      #8B93A8;
+  --txt3:      #555E78;
+  --blue:      #4F8EF7;
+  --blue-dim:  rgba(79,142,247,0.12);
+  --blue-glow: rgba(79,142,247,0.25);
+  --violet:    #8B5CF6;
+  --violet-dim:rgba(139,92,246,0.12);
+  --green:     #34D399;
+  --green-dim: rgba(52,211,153,0.1);
+  --red:       #F87171;
+  --red-dim:   rgba(248,113,113,0.1);
+  --amber:     #FBBF24;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--ink);
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 200px; opacity: 0.4;
+}
+.bg-mesh {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.bg-mesh::before {
+  content:''; position:absolute;
+  width:700px; height:700px; border-radius:50%;
+  background: radial-gradient(circle, rgba(79,142,247,0.07) 0%, transparent 65%);
+  top:-200px; left:-150px;
+  animation: driftA 18s ease-in-out infinite alternate;
+}
+.bg-mesh::after {
+  content:''; position:absolute;
+  width:600px; height:600px; border-radius:50%;
+  background: radial-gradient(circle, rgba(139,92,246,0.07) 0%, transparent 65%);
+  bottom:-150px; right:-100px;
+  animation: driftB 22s ease-in-out infinite alternate;
+}
+@keyframes driftA { from{transform:translate(0,0)} to{transform:translate(60px,40px)} }
+@keyframes driftB { from{transform:translate(0,0)} to{transform:translate(-50px,-30px)} }
+
+.page {
+  position: relative; z-index: 1;
+  max-width: 960px; margin: 0 auto;
+  padding: 48px 24px 100px;
+}
+
+/* TOPBAR */
+.topbar {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 52px;
+  animation: fadeSlideDown 0.7s cubic-bezier(0.16,1,0.3,1) both;
+}
+.logo-mark {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: #fff;
+  box-shadow: 0 0 24px var(--blue-glow);
+}
+.topbar-info { flex:1; }
+.topbar-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--txt2); letter-spacing: 2.5px; text-transform: uppercase; }
+.topbar-sub { font-size: 11px; color: var(--txt3); margin-top: 2px; }
+.conn-pill {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 14px; border-radius: 100px;
+  border: 1px solid var(--edge2); background: var(--ink2);
+  font-size: 12px; font-weight: 500; color: var(--txt2);
+}
+.conn-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--txt3); transition: background 0.3s; }
+.conn-dot.live { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.conn-dot.err  { background: var(--red); }
+
+/* HERO */
+.hero { margin-bottom: 40px; animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 6vw, 58px); font-weight: 800; line-height: 1.08; letter-spacing: -1.5px;
+  background: linear-gradient(135deg, #E8ECF4 0%, #6B7A99 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero h1 span {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-desc { margin-top: 12px; font-size: 15px; color: var(--txt2); line-height: 1.6; max-width: 480px; }
+
+/* CONFIG */
+.config-box {
+  background: var(--ink2); border: 1px solid var(--edge);
+  border-radius: 16px; overflow: hidden; margin-bottom: 28px;
+  animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s both;
+}
+.config-toggle {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 20px; cursor: pointer; user-select: none;
+  font-size: 13px; font-weight: 500; color: var(--txt2); transition: color 0.2s;
+}
+.config-toggle:hover { color: var(--txt); }
+.config-toggle svg { opacity: 0.6; flex-shrink:0; }
+.config-toggle .chevron { margin-left:auto; transition: transform 0.3s; }
+.config-body { padding: 0 20px 20px; display: none; border-top: 1px solid var(--edge); }
+.config-body.open { display: block; }
+.config-label { font-size: 11px; font-weight: 600; color: var(--txt3); text-transform:uppercase; letter-spacing:1.5px; margin: 16px 0 8px; }
+.config-row { display:flex; gap:8px; }
+.fi {
+  flex:1; background:var(--ink3); border:1px solid var(--edge2);
+  border-radius:10px; padding:11px 14px;
+  font-family:'DM Mono',monospace; font-size:12px; color:var(--txt);
+  outline:none; transition:border-color 0.2s,box-shadow 0.2s;
+}
+.fi:focus { border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-dim); }
+.fi::placeholder { color:var(--txt3); }
+.btn-load {
+  background: linear-gradient(135deg, var(--blue), var(--violet));
+  color:#fff; border:none; border-radius:10px;
+  padding:11px 20px; font-family:'DM Sans',sans-serif;
+  font-size:13px; font-weight:700; cursor:pointer;
+  transition:opacity 0.2s,transform 0.1s; white-space:nowrap;
+  box-shadow: 0 4px 16px var(--blue-glow);
+}
+.btn-load:hover { opacity:0.88; }
+.btn-load:active { transform:scale(0.97); }
+.config-hint { font-size:11px; color:var(--txt3); line-height:1.7; margin-top:12px; }
+.config-hint code {
+  font-family:'DM Mono',monospace; background:var(--ink3); color:var(--blue);
+  padding:1px 6px; border-radius:4px; font-size:11px;
+}
+
+/* SEM TABS */
+.sem-tabs { display:flex; gap:8px; margin-bottom:28px; animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+.sem-tab {
+  flex:1; padding:14px 20px; border-radius:12px;
+  border:1px solid var(--edge); background:var(--ink2);
+  cursor:pointer; text-align:center; transition:all 0.25s;
+  position:relative; overflow:hidden;
+}
+.sem-tab::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity 0.25s; }
+.sem-tab.ganjil::before { background:linear-gradient(135deg,var(--blue-dim),transparent); }
+.sem-tab.genap::before  { background:linear-gradient(135deg,var(--violet-dim),transparent); }
+.sem-tab.active::before { opacity:1; }
+.sem-tab.active.ganjil { border-color:rgba(79,142,247,0.4); }
+.sem-tab.active.genap  { border-color:rgba(139,92,246,0.4); }
+.sem-tab-emoji { font-size:20px; display:block; margin-bottom:6px; }
+.sem-tab-label { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; color:var(--txt2); transition:color 0.25s; position:relative; }
+.sem-tab.active .sem-tab-label { color:var(--txt); }
+.sem-tab-sub { font-size:11px; color:var(--txt3); margin-top:3px; position:relative; }
+.sem-badge { position:absolute; top:10px; right:10px; font-size:10px; font-weight:700; padding:2px 8px; border-radius:100px; background:var(--blue-dim); color:var(--blue); display:none; }
+.sem-tab.active.ganjil .sem-badge { display:block; background:var(--blue-dim); color:var(--blue); }
+.sem-tab.active.genap  .sem-badge { display:block; background:var(--violet-dim); color:var(--violet); }
+
+/* SEARCH */
+.search-wrap { position:relative; margin-bottom:20px; animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+.search-ico { position:absolute; left:18px; top:50%; transform:translateY(-50%); pointer-events:none; transition:opacity 0.2s; opacity:0.4; }
+.search-ico svg { display:block; }
+.search-input {
+  width:100%; background:var(--ink2); border:1.5px solid var(--edge2); border-radius:14px;
+  padding:18px 18px 18px 52px; font-family:'DM Sans',sans-serif; font-size:16px; font-weight:500;
+  color:var(--txt); outline:none; transition:border-color 0.25s, box-shadow 0.25s;
+}
+.search-input::placeholder { color:var(--txt3); font-weight:400; }
+.search-input:focus { border-color:var(--blue); box-shadow:0 0 0 4px var(--blue-dim); }
+.search-input:disabled { opacity:0.4; cursor:not-allowed; }
+
+/* DROPDOWN */
+.dropdown {
+  position:absolute; top:calc(100% + 8px); left:0; right:0;
+  background:var(--ink2); border:1px solid var(--edge2);
+  border-radius:14px; overflow:hidden; z-index:200;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6); display:none;
+}
+.dropdown.open { display:block; animation:popUp 0.18s cubic-bezier(0.16,1,0.3,1); }
+.dd-item { display:flex; align-items:center; gap:14px; padding:13px 18px; cursor:pointer; border-bottom:1px solid var(--edge); transition:background 0.15s; }
+.dd-item:last-child { border-bottom:none; }
+.dd-item:hover,.dd-item.focus { background:var(--ink3); }
+.dd-ava { width:36px; height:36px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:13px; font-weight:800; color:#fff; }
+.dd-name { font-size:14px; font-weight:500; color:var(--txt); }
+.dd-meta { font-size:11px; color:var(--txt3); margin-top:1px; }
+.dd-empty { padding:20px; text-align:center; color:var(--txt3); font-size:13px; }
+mark { background:rgba(79,142,247,0.25); color:var(--blue); border-radius:3px; padding:0 2px; }
+
+/* STATUS */
+.status-line { display:flex; align-items:center; gap:9px; margin-bottom:36px; font-size:12px; color:var(--txt3); font-family:'DM Mono',monospace; animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+.s-dot { width:7px; height:7px; border-radius:50%; background:var(--txt3); }
+.s-dot.ok  { background:var(--green); box-shadow:0 0 8px var(--green); animation:pulse 2s infinite; }
+.s-dot.err { background:var(--red); }
+
+/* RESULT */
+.result { display:none; }
+.result.show { display:block; animation: fadeSlideUp 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+
+.prof-strip {
+  background:var(--ink2); border:1px solid var(--edge);
+  border-radius:20px 20px 0 0; padding:28px 32px;
+  display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  border-bottom:none; position:relative; overflow:hidden;
+}
+.prof-strip::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(135deg, var(--blue-dim) 0%, var(--violet-dim) 100%);
+}
+.prof-ava { width:60px; height:60px; border-radius:16px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:#fff; position:relative; box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+.prof-meta { flex:1; position:relative; }
+.prof-name { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--txt); letter-spacing:-0.5px; }
+.prof-kelas { font-size:13px; color:var(--txt2); margin-top:4px; display:flex; gap:8px; align-items:center; }
+.kbadge { font-size:10px; font-weight:700; padding:3px 10px; border-radius:100px; background:var(--blue-dim); color:var(--blue); letter-spacing:1px; }
+.kel-badge { position:relative; padding:8px 18px; border-radius:100px; font-size:12px; font-weight:700; letter-spacing:0.5px; display:inline-flex; align-items:center; gap:6px; }
+.kel-badge.ok  { background:var(--green-dim); color:var(--green); border:1px solid rgba(52,211,153,0.3); }
+.kel-badge.no  { background:var(--red-dim);   color:var(--red);   border:1px solid rgba(248,113,113,0.3); }
+
+.stat-row { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--edge); border-top:none; background:var(--ink2); overflow:hidden; }
+.stat-box { padding:22px 24px; text-align:center; border-right:1px solid var(--edge); }
+.stat-box:last-child { border-right:none; }
+.stat-num { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1; }
+.stat-num.c-blue   { color:var(--blue); }
+.stat-num.c-green  { color:var(--green); }
+.stat-num.c-red    { color:var(--red); }
+.stat-lbl { font-size:10px; font-weight:600; color:var(--txt3); text-transform:uppercase; letter-spacing:1.5px; margin-top:6px; }
+
+.prog-strip { background:var(--ink2); border:1px solid var(--edge); border-top:none; padding:16px 28px; }
+.prog-head { display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px; }
+.prog-label { color:var(--txt2); font-weight:500; }
+.prog-pct { font-family:'DM Mono',monospace; font-weight:600; color:var(--green); }
+.prog-track { height:5px; background:var(--ink3); border-radius:100px; overflow:hidden; }
+.prog-fill { height:100%; border-radius:100px; background:linear-gradient(90deg, var(--green), var(--blue)); transition:width 1s cubic-bezier(0.16,1,0.3,1); }
+
+.materi-wrap { background:var(--ink2); border:1px solid var(--edge); border-top:none; border-radius:0 0 20px 20px; padding:24px 28px; }
+.mat-section-title { font-size:11px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:2px; margin-bottom:16px; }
+.materi-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:10px; }
+.mat-card { border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:12px; border:1px solid; transition:transform 0.15s, box-shadow 0.15s; cursor:default; animation: matIn 0.3s ease both; }
+.mat-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+.mat-card.t { background:var(--green-dim); border-color:rgba(52,211,153,0.2); }
+.mat-card.b { background:var(--red-dim);   border-color:rgba(248,113,113,0.2); }
+.mat-idx { width:30px; height:30px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'DM Mono',monospace; font-size:11px; font-weight:600; }
+.t .mat-idx { background:rgba(52,211,153,0.15); color:var(--green); }
+.b .mat-idx { background:rgba(248,113,113,0.15); color:var(--red); }
+.mat-info { flex:1; min-width:0; }
+.mat-name { font-size:13px; font-weight:500; color:var(--txt); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:2px; }
+.mat-nilai { font-size:11px; font-family:'DM Mono',monospace; color:var(--txt3); }
+.mat-chip { font-size:10px; font-weight:700; padding:3px 9px; border-radius:100px; text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap; }
+.t .mat-chip { background:rgba(52,211,153,0.15); color:var(--green); }
+.b .mat-chip { background:rgba(248,113,113,0.15); color:var(--red); }
+
+.loading { text-align:center; padding:60px 0; display:none; }
+.spin { width:36px; height:36px; border:2.5px solid var(--edge2); border-top-color:var(--blue); border-radius:50%; animation:spin 0.7s linear infinite; margin:0 auto 16px; }
+.loading p { color:var(--txt3); font-size:13px; }
+
+.empty-state { text-align:center; padding:60px 20px; color:var(--txt3); font-size:14px; display:none; }
+.empty-state .big { font-size:40px; margin-bottom:12px; }
+
+@keyframes fadeSlideDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeSlideUp   { from{opacity:0;transform:translateY(20px)}  to{opacity:1;transform:translateY(0)} }
+@keyframes popUp  { from{opacity:0;transform:translateY(6px) scale(0.98)} to{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes spin   { to{transform:rotate(360deg)} }
+@keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:0.4} }
+@keyframes matIn  { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+@media(max-width:600px) {
+  .prof-strip { padding:20px; }
+  .materi-wrap { padding:20px 16px; }
+  .materi-grid { grid-template-columns:1fr; }
+  .stat-num { font-size:24px; }
+  .hero h1 { letter-spacing:-1px; }
+  .sem-tabs { gap:6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-mesh"></div>
+
+<div class="page">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="logo-mark">ET</div>
+    <div class="topbar-info">
+      <div class="topbar-title">E-TATIB</div>
+      <div class="topbar-sub">Sistem Manajemen Tata Tertib Sekolah</div>
+    </div>
+    <div class="conn-pill">
+      <div class="conn-dot" id="connDot"></div>
+      <span id="connLabel">Belum terhubung</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Laporan<br><span>Ketuntasan</span><br>Siswa</h1>
+    <p class="hero-desc">Cek ketuntasan materi per siswa secara real-time. Data diambil langsung dari Google Sheets sekolah.</p>
+  </div>
+
+  <!-- Config — 1 Sheet ID saja, pilih tab Ganjil/Genap -->
+  <div class="config-box">
+    <div class="config-toggle" onclick="toggleConfig(this)">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2"/></svg>
+      Konfigurasi Sumber Data Google Sheets
+      <svg class="chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="config-body open" id="configBody">
+      <div class="config-label">Sheet ID atau URL Google Sheets</div>
+      <div class="config-row">
+        <input class="fi" id="sheetUrl" placeholder="ID atau URL Google Sheets…">
+      </div>
+      <div class="config-label">Nama Tab Sheet Ganjil &amp; Genap</div>
+      <div class="config-row">
+        <input class="fi" id="tabGanjil" placeholder="Tab Ganjil (default: Ganjil)" style="max-width:200px">
+        <input class="fi" id="tabGenap"  placeholder="Tab Genap (default: Genap)"  style="max-width:200px">
+        <button class="btn-load" onclick="loadBoth()">⚡ Muat Data</button>
+      </div>
+      <p class="config-hint">
+        Pastikan Sheets diset <strong>Publik (siapa saja yang punya link bisa melihat)</strong>.<br>
+        Gunakan template <code>template_ketuntasan_fixed.xlsx</code> — upload ke Google Sheets, lalu salin ID dari URL.<br>
+        Format kolom (1 baris header flat): <code>Nama Siswa</code> · <code>Kelas</code> · <code>No. Induk</code> · <code>Materi 1 Nilai</code> · <code>Materi 1 Status</code> · <code>Materi 2 Nilai</code> · <code>Materi 2 Status</code> · … · <code>Status Kelengkapan</code>
+      </p>
+    </div>
+  </div>
+
+  <!-- Semester tabs -->
+  <div class="sem-tabs">
+    <div class="sem-tab ganjil active" onclick="switchSem('ganjil')">
+      <span class="sem-badge" id="badgeGanjil">AKTIF</span>
+      <span class="sem-tab-emoji">🌙</span>
+      <div class="sem-tab-label">Semester Ganjil</div>
+      <div class="sem-tab-sub" id="countGanjil">Belum dimuat</div>
+    </div>
+    <div class="sem-tab genap" onclick="switchSem('genap')">
+      <span class="sem-badge" id="badgeGenap">AKTIF</span>
+      <span class="sem-tab-emoji">☀️</span>
+      <div class="sem-tab-label">Semester Genap</div>
+      <div class="sem-tab-sub" id="countGenap">Belum dimuat</div>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap">
+    <span class="search-ico">
+      <svg width="18" height="18" fill="none" stroke="#8B93A8" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </span>
+    <input class="search-input" id="searchInput" placeholder="Ketik nama siswa…" autocomplete="off" disabled>
+    <div class="dropdown" id="dropdown"></div>
+  </div>
+
+  <!-- Status -->
+  <div class="status-line">
+    <div class="s-dot" id="sDot"></div>
+    <span id="sText">Konfigurasi sumber data Google Sheets terlebih dahulu</span>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="spin"></div>
+    <p>Mengambil data dari Google Sheets…</p>
+  </div>
+
+  <!-- Empty -->
+  <div class="empty-state" id="emptyState">
+    <div class="big">🔍</div>
+    Tidak ada data untuk semester ini.
+  </div>
+
+  <!-- Result -->
+  <div class="result" id="result"></div>
+
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────────
+const state = { ganjil: [], genap: [], sem: 'ganjil', filtered: [] };
+
+// ── Utils ──────────────────────────────────────────────────────────────────────
+const $  = id => document.getElementById(id);
+const hl = (t,q) => t.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark>$1</mark>');
+const ini = n  => n.split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
+const avaBg = n => { const c = ['#4F8EF7','#8B5CF6','#34D399','#F59E0B','#EC4899','#06B6D4']; return c[n.charCodeAt(0)%c.length]; };
+
+function extractId(raw) {
+  raw = (raw||'').trim();
+  const m = raw.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+  if (m) return m[1];
+  if (/^[a-zA-Z0-9_-]{30,}$/.test(raw)) return raw;
+  return null;
+}
+
+function setConn(type, label) {
+  $('connDot').className = 'conn-dot' + (type==='ok'?' live':type==='err'?' err':'');
+  $('connLabel').textContent = label;
+}
+function setStatus(type, msg) {
+  $('sDot').className = 's-dot' + (type==='ok'?' ok':type==='err'?' err':'');
+  $('sText').textContent = msg;
+}
+
+function toggleConfig(el) {
+  const body = $('configBody');
+  body.classList.toggle('open');
+  el.querySelector('.chevron').style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+// ── Parse GViz — header flat 1 baris ──────────────────────────────────────────
+// Format kolom yang diharapkan:
+//   Nama Siswa | Kelas | No. Induk | Materi 1 Nilai | Materi 1 Status | ... | Status Kelengkapan
+function parseGViz(json) {
+  const cols = json.table.cols.map(c => (c.label||'').trim());
+  const rows = json.table.rows || [];
+  const results = [];
+
+  // Lewati baris header ekstra jika ada (baris di mana Nama Siswa = "Nama Siswa")
+  rows.forEach(row => {
+    const cells = row.c || [];
+    const obj = { nama:'', kelas:'', nis:'', materi:[], kelengkapan:'' };
+
+    cols.forEach((col, i) => {
+      const raw = cells[i]?.v ?? '';
+      const val = raw !== null && raw !== undefined ? String(raw) : '';
+      const low = col.toLowerCase();
+
+      if (/^nama/.test(low))                  { obj.nama = val; return; }
+      if (/^kelas$/.test(low))                 { obj.kelas = val; return; }
+      if (/no\.?\s*induk|^nis$|^nisn$/.test(low)) { obj.nis = val; return; }
+      if (/status\s*kele/.test(low))           { obj.kelengkapan = val; return; }
+
+      // "Materi X Nilai"  →  nama = "Materi X"
+      const mNilai  = col.match(/^(.+?)\s+nilai$/i);
+      const mStatus = col.match(/^(.+?)\s+status$/i);
+
+      if (mNilai) {
+        const nm = mNilai[1].trim();
+        let ex = obj.materi.find(m => m.nama === nm);
+        if (!ex) { ex = { nama: nm, nilai:'', status:'' }; obj.materi.push(ex); }
+        ex.nilai = val || '-';
+        return;
+      }
+      if (mStatus) {
+        const nm = mStatus[1].trim();
+        let ex = obj.materi.find(m => m.nama === nm);
+        if (!ex) { ex = { nama: nm, nilai:'', status:'' }; obj.materi.push(ex); }
+        ex.status = val;
+        return;
+      }
+    });
+
+    const nameLow = obj.nama.toLowerCase();
+    if (obj.nama && nameLow !== 'nama siswa' && nameLow !== 'nama') {
+      results.push(obj);
+    }
+  });
+  return results;
+}
+
+// ── Fetch satu sheet tab ───────────────────────────────────────────────────────
+async function fetchSheet(id, tabName) {
+  if (!id) return [];
+  const tab = encodeURIComponent(tabName);
+  const url = `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:json&sheet=${tab}`;
+  const res = await fetch(url);
+  const txt = await res.text();
+  // GViz membungkus JSON dengan callback — strip prefix & suffix
+  const json = JSON.parse(txt.substring(47, txt.length - 2));
+  return parseGViz(json);
+}
+
+// ── Load kedua semester ────────────────────────────────────────────────────────
+async function loadBoth() {
+  const id = extractId($('sheetUrl').value);
+  const tabG = $('tabGanjil').value.trim() || 'Ganjil';
+  const tabE = $('tabGenap').value.trim()  || 'Genap';
+
+  if (!id) { setStatus('err','Masukkan ID atau URL Google Sheets terlebih dahulu.'); return; }
+
+  $('loading').style.display = 'block';
+  $('result').classList.remove('show');
+  $('emptyState').style.display = 'none';
+  setStatus('', 'Menghubungkan ke Google Sheets…');
+  setConn('', 'Mengambil data…');
+
+  try {
+    const [dG, dE] = await Promise.all([fetchSheet(id, tabG), fetchSheet(id, tabE)]);
+    state.ganjil = dG;
+    state.genap  = dE;
+
+    $('countGanjil').textContent = dG.length > 0 ? `${dG.length} siswa` : 'Tidak ada data';
+    $('countGenap').textContent  = dE.length > 0 ? `${dE.length} siswa` : 'Tidak ada data';
+
+    const total = dG.length + dE.length;
+    if (total === 0) {
+      setStatus('err', 'Tidak ada data ditemukan. Pastikan nama tab sheet benar & format kolom sesuai template.');
+      setConn('err', 'Gagal');
+    } else {
+      setStatus('ok', `${total} data dimuat — Ganjil (${tabG}): ${dG.length} · Genap (${tabE}): ${dE.length}`);
+      setConn('ok', 'Terhubung');
+      $('searchInput').disabled = false;
+      $('searchInput').focus();
+      $('configBody').classList.remove('open');
+    }
+  } catch(e) {
+    setStatus('err', 'Gagal memuat data. Pastikan Sheets sudah publik & ID benar.');
+    setConn('err', 'Error');
+  } finally {
+    $('loading').style.display = 'none';
+  }
+}
+
+// ── Semester switch ────────────────────────────────────────────────────────────
+function switchSem(sem) {
+  state.sem = sem;
+  document.querySelectorAll('.sem-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.sem-tab.${sem}`).classList.add('active');
+  $('searchInput').value = '';
+  $('dropdown').classList.remove('open');
+  $('result').classList.remove('show');
+  $('emptyState').style.display = 'none';
+
+  const data = state[sem];
+  if (data.length === 0 && (state.ganjil.length + state.genap.length) > 0) {
+    $('emptyState').style.display = 'block';
+  }
+}
+
+// ── Autocomplete ───────────────────────────────────────────────────────────────
+const searchEl = $('searchInput');
+const ddEl     = $('dropdown');
+let selIdx = -1;
+
+searchEl.addEventListener('input', () => {
+  const q = searchEl.value.trim().toLowerCase();
+  $('result').classList.remove('show');
+  $('emptyState').style.display = 'none';
+
+  if (q.length < 2) { ddEl.classList.remove('open'); return; }
+
+  const data = state[state.sem];
+  state.filtered = data.filter(s => s.nama.toLowerCase().includes(q)).slice(0, 8);
+  selIdx = -1;
+
+  if (state.filtered.length === 0) {
+    ddEl.innerHTML = `<div class="dd-empty">Tidak ada siswa bernama "<strong>${searchEl.value}</strong>"</div>`;
+  } else {
+    ddEl.innerHTML = state.filtered.map((s,i) => `
+      <div class="dd-item" data-i="${i}" onclick="pick(${i})">
+        <div class="dd-ava" style="background:${avaBg(s.nama)}">${ini(s.nama)}</div>
+        <div>
+          <div class="dd-name">${hl(s.nama,q)}</div>
+          <div class="dd-meta">${s.kelas || '—'} ${s.nis ? '· NIS '+s.nis : ''}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  ddEl.classList.add('open');
+});
+
+searchEl.addEventListener('keydown', e => {
+  const items = ddEl.querySelectorAll('.dd-item');
+  if (!items.length) return;
+  if (e.key==='ArrowDown') { selIdx=Math.min(selIdx+1,items.length-1); updActive(items); e.preventDefault(); }
+  if (e.key==='ArrowUp')   { selIdx=Math.max(selIdx-1,0); updActive(items); e.preventDefault(); }
+  if (e.key==='Enter' && selIdx>=0) pick(selIdx);
+  if (e.key==='Escape') ddEl.classList.remove('open');
+});
+
+function updActive(items) { items.forEach((el,i) => el.classList.toggle('focus', i===selIdx)); }
+document.addEventListener('click', e => { if (!e.target.closest('.search-wrap')) ddEl.classList.remove('open'); });
+
+function pick(idx) {
+  const s = state.filtered[idx];
+  ddEl.classList.remove('open');
+  searchEl.value = s.nama;
+  renderResult(s);
+}
+
+// ── Render Result ──────────────────────────────────────────────────────────────
+function renderResult(s) {
+  const total  = s.materi.length;
+  const tuntas = s.materi.filter(m => /tuntas/i.test(m.status) && !/belum/i.test(m.status)).length;
+  const belum  = total - tuntas;
+  const pct    = total > 0 ? Math.round(tuntas/total*100) : 0;
+  const isLengkap = /lengkap/i.test(s.kelengkapan) && !/tidak/i.test(s.kelengkapan);
+  const sem    = state.sem === 'ganjil' ? 'Semester Ganjil' : 'Semester Genap';
+
+  const el = $('result');
+  el.innerHTML = `
+    <div class="prof-strip">
+      <div class="prof-ava" style="background:linear-gradient(135deg,${avaBg(s.nama)},${avaBg(s.nama+'x')})">${ini(s.nama)}</div>
+      <div class="prof-meta">
+        <div class="prof-name">${s.nama}</div>
+        <div class="prof-kelas">
+          <span class="kbadge">${s.kelas || 'Kelas ?'}</span>
+          ${s.nis ? `<span style="color:var(--txt3);font-size:12px">NIS ${s.nis}</span>` : ''}
+          <span style="color:var(--txt3);font-size:12px">· ${sem}</span>
+        </div>
+      </div>
+      <div class="kel-badge ${isLengkap?'ok':'no'}">
+        ${isLengkap ? '✓ Lengkap' : '✗ Tidak Lengkap'}
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num c-blue">${total}</div>
+        <div class="stat-lbl">Total Materi</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num c-green">${tuntas}</div>
+        <div class="stat-lbl">Tuntas</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num c-red">${belum}</div>
+        <div class="stat-lbl">Belum Tuntas</div>
+      </div>
+    </div>
+
+    <div class="prog-strip">
+      <div class="prog-head">
+        <span class="prog-label">Progress Ketuntasan</span>
+        <span class="prog-pct">${pct}%</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill" id="pFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="materi-wrap">
+      <div class="mat-section-title">Detail Setiap Materi</div>
+      <div class="materi-grid">
+        ${total === 0
+          ? `<p style="color:var(--txt3);font-size:13px;grid-column:1/-1">Tidak ada data materi ditemukan.</p>`
+          : s.materi.map((m,i) => {
+              const ok = /tuntas/i.test(m.status) && !/belum/i.test(m.status);
+              return `
+                <div class="mat-card ${ok?'t':'b'}" style="animation-delay:${i*0.03}s">
+                  <div class="mat-idx">${String(i+1).padStart(2,'0')}</div>
+                  <div class="mat-info">
+                    <div class="mat-name" title="${m.nama}">${m.nama}</div>
+                    <div class="mat-nilai">Nilai: <strong>${m.nilai||'—'}</strong></div>
+                  </div>
+                  <div class="mat-chip">${m.status || 'Belum'}</div>
+                </div>
+              `;
+            }).join('')
+        }
+      </div>
+    </div>
+  `;
+
+  el.classList.add('show');
+  el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  setTimeout(() => { const f=$('pFill'); if(f) f.style.width=pct+'%'; }, 80);
+}
+</script>
+</body>
+</html>
